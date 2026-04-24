@@ -48,23 +48,22 @@
         <p>Generate prerequisite PDFs for FortiSOAR integrations.</p>
     </div>
 
-    <div class="instruction-box">
-        <strong>Format:</strong> Enter connector names separated by commas. <br>
-        To request a specific version, use <code>connector:version</code>.
+   <div class="instruction-box">
+        <strong>Format:</strong> Enter the <strong>complete names</strong> of the connectors, separated by commas. 
     </div>
 
     <form action="/generate" method="POST" onsubmit="startProcess()">
         <div class="form-group">
             <label for="connectors">Connector List</label>
-            <textarea id="connectors" name="connectors" placeholder="e.g. Exchange, activedirectory:2.0.1,alienvault-otx:1.0.2 " required></textarea>
+            <textarea id="connectors" name="connectors" placeholder="e.g. Exchange, Cisco Meraki MX VPN Firewall, Carbon Black Protect Bit9" required></textarea>
         </div>
         <button type="submit" id="submitBtn">GENERATE DOCUMENTATION</button>
     </form>
         
     <div class="bottom-note">
-        ℹ️ <strong>Note:</strong> If no version is specified, the documentation for the <strong>latest version</strong> will be retrieved by default.
+        ℹ️ <strong>Note:</strong> This tool automatically fetches the documentation for the <strong>latest available version</strong> of every connector.
     </div>
-    
+
     <div id="loading">
         <div class="spinner"></div> Processing Requests...
     </div>

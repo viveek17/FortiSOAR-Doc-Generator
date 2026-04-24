@@ -1,0 +1,3535 @@
+from bs4 import BeautifulSoup
+import json
+
+html_content = """<div class="connectors">
+            <a class="connector" href="/fortisoar/connectors/abnormal-security">
+            <div class="connector-icons connector-icon-abnormal-security"></div>
+            <div class="connector-title">Abnormal Security</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/abuseipdb">
+            <div class="connector-icons connector-icon-abuseipdb"></div>
+            <div class="connector-title">AbuseIPDB</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/acronis">
+            <div class="connector-icons connector-icon-acronis"></div>
+            <div class="connector-title">Acronis</div>
+                            <span class="connector-category-badge">Attack surface management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/active-directory">
+            <div class="connector-icons connector-icon-active-directory"></div>
+            <div class="connector-title">Active Directory</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ai-assitant-utils">
+            <div class="connector-icons connector-icon-ai-assitant-utils"></div>
+            <div class="connector-title">AI Assistant Utils</div>
+                            <span class="connector-category-badge">Digital assistant</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/airwatch">
+            <div class="connector-icons connector-icon-airwatch"></div>
+            <div class="connector-title">AirWatch</div>
+                            <span class="connector-category-badge">Enterprise mobility management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/akamai-prolexic">
+            <div class="connector-icons connector-icon-akamai-prolexic"></div>
+            <div class="connector-title">Akamai Prolexic</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/akamai-waf">
+            <div class="connector-icons connector-icon-akamai-waf"></div>
+            <div class="connector-title">Akamai WAF</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/alienvault-otx">
+            <div class="connector-icons connector-icon-alienvault-otx"></div>
+            <div class="connector-title">AlienVault OTX</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/alienvault_usm_anywhere">
+            <div class="connector-icons connector-icon-alienvault_usm_anywhere"></div>
+            <div class="connector-title">AlienVault USM Anywhere</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/alienvault_usm_central">
+            <div class="connector-icons connector-icon-alienvault_usm_central"></div>
+            <div class="connector-title">AlienVault USM Central</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/alloy-itsm">
+            <div class="connector-icons connector-icon-alloy-itsm"></div>
+            <div class="connector-title">Alloy ITSM</div>
+                            <span class="connector-category-badge">Ticket Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/alphamountain">
+            <div class="connector-icons connector-icon-alphamountain"></div>
+            <div class="connector-title">alphaMountain</div>
+                            <span class="connector-category-badge">Threat Detection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/alphamountainfeed">
+            <div class="connector-icons connector-icon-alphamountainfeed"></div>
+            <div class="connector-title">alphaMountain Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/alphasoc">
+            <div class="connector-icons connector-icon-alphasoc"></div>
+            <div class="connector-title">AlphaSOC Network Behavior Analytics</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/alexa">
+            <div class="connector-icons connector-icon-alexa"></div>
+            <div class="connector-title">Amazon Alexa</div>
+                            <span class="connector-category-badge">Digital assistant</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/anomali_enterprise">
+            <div class="connector-icons connector-icon-anomali_enterprise"></div>
+            <div class="connector-title">Anomali Enterprise</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/anomali-limo-threat-intel">
+            <div class="connector-icons connector-icon-anomali-limo-threat-intel"></div>
+            <div class="connector-title">Anomali Limo Threat Intel Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/anomali-staxx">
+            <div class="connector-icons connector-icon-anomali-staxx"></div>
+            <div class="connector-title">Anomali STAXX</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/anomali-threatstream">
+            <div class="connector-icons connector-icon-anomali-threatstream"></div>
+            <div class="connector-title">Anomali ThreatStream</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ansibletower">
+            <div class="connector-icons connector-icon-ansibletower"></div>
+            <div class="connector-title">Ansible Tower</div>
+                            <span class="connector-category-badge">Automation controller</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/any-run">
+            <div class="connector-icons connector-icon-any-run"></div>
+            <div class="connector-title">ANY.RUN</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/any-run-cloud-sandbox">
+            <div class="connector-icons connector-icon-any-run-cloud-sandbox"></div>
+            <div class="connector-title">ANY.RUN Cloud Sandbox</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/anything-llm">
+            <div class="connector-icons connector-icon-anything-llm"></div>
+            <div class="connector-title">Anything LLM</div>
+                            <span class="connector-category-badge">ML Service</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/apivoid">
+            <div class="connector-icons connector-icon-apivoid"></div>
+            <div class="connector-title">apivoid</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/arbor">
+            <div class="connector-icons connector-icon-arbor"></div>
+            <div class="connector-title">Arbor APS</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/arbor-ddos">
+            <div class="connector-icons connector-icon-arbor-ddos"></div>
+            <div class="connector-title">Arbor DDoS</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/arcanna-ai">
+            <div class="connector-icons connector-icon-arcanna-ai"></div>
+            <div class="connector-title">Arcanna.ai</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/arcsight">
+            <div class="connector-icons connector-icon-arcsight"></div>
+            <div class="connector-title">ArcSight</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/argo-cd">
+            <div class="connector-icons connector-icon-argo-cd"></div>
+            <div class="connector-title">Argo CD</div>
+                            <span class="connector-category-badge">DevOps and Digital Operations</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/arkime">
+            <div class="connector-icons connector-icon-arkime"></div>
+            <div class="connector-title">Arkime</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/armis">
+            <div class="connector-icons connector-icon-armis"></div>
+            <div class="connector-title">Armis</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/arubaclearpass">
+            <div class="connector-icons connector-icon-arubaclearpass"></div>
+            <div class="connector-title">Aruba ClearPass</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/atlassian-confluence-cloud">
+            <div class="connector-icons connector-icon-atlassian-confluence-cloud"></div>
+            <div class="connector-title">Atlassian Confluence Cloud</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/atlassian-confluence-server">
+            <div class="connector-icons connector-icon-atlassian-confluence-server"></div>
+            <div class="connector-title">Atlassian Confluence Server</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/atlassianstatuspage">
+            <div class="connector-icons connector-icon-atlassianstatuspage"></div>
+            <div class="connector-title">Atlassian Status Page</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/attivo_botsin">
+            <div class="connector-icons connector-icon-attivo_botsin"></div>
+            <div class="connector-title">Attivo BOTsink</div>
+                            <span class="connector-category-badge">Deception</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-ec2">
+            <div class="connector-icons connector-icon-aws-ec2"></div>
+            <div class="connector-title">AWS</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-access-analyzer">
+            <div class="connector-icons connector-icon-aws-access-analyzer"></div>
+            <div class="connector-title">AWS Access Analyzer</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-athena">
+            <div class="connector-icons connector-icon-aws-athena"></div>
+            <div class="connector-title">AWS Athena</div>
+                            <span class="connector-category-badge">Query Service</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-cloudtrail">
+            <div class="connector-icons connector-icon-aws-cloudtrail"></div>
+            <div class="connector-title">AWS CloudTrail</div>
+                            <span class="connector-category-badge">Logging</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/awscloudwatchlogs">
+            <div class="connector-icons connector-icon-awscloudwatchlogs"></div>
+            <div class="connector-title">AWS CloudWatch Logs</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-commands">
+            <div class="connector-icons connector-icon-aws-commands"></div>
+            <div class="connector-title">AWS Commands</div>
+                            <span class="connector-category-badge">IT Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-dynamodb">
+            <div class="connector-icons connector-icon-aws-dynamodb"></div>
+            <div class="connector-title">AWS DynamoDB</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-ec2">
+            <div class="connector-icons connector-icon-aws-ec2"></div>
+            <div class="connector-title">AWS EC2</div>
+                            <span class="connector-category-badge">Compute Platform</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/awsfeed">
+            <div class="connector-icons connector-icon-awsfeed"></div>
+            <div class="connector-title">AWS Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/awsguardduty">
+            <div class="connector-icons connector-icon-awsguardduty"></div>
+            <div class="connector-title">AWS GuardDuty</div>
+                            <span class="connector-category-badge">Threat Detection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-lambda">
+            <div class="connector-icons connector-icon-aws-lambda"></div>
+            <div class="connector-title">AWS Lambda</div>
+                            <span class="connector-category-badge">Compute Platform</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-network-firewall">
+            <div class="connector-icons connector-icon-aws-network-firewall"></div>
+            <div class="connector-title">AWS Network Firewall</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/awsroute53">
+            <div class="connector-icons connector-icon-awsroute53"></div>
+            <div class="connector-title">AWS Route 53</div>
+                            <span class="connector-category-badge">Web Application</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-s3">
+            <div class="connector-icons connector-icon-aws-s3"></div>
+            <div class="connector-title">AWS S3</div>
+                            <span class="connector-category-badge">Storage</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-sagemaker">
+            <div class="connector-icons connector-icon-aws-sagemaker"></div>
+            <div class="connector-title">AWS SageMaker</div>
+                            <span class="connector-category-badge">ML Service</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-security-hub">
+            <div class="connector-icons connector-icon-aws-security-hub"></div>
+            <div class="connector-title">AWS Security Hub</div>
+                            <span class="connector-category-badge">Security Posture Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-sqs">
+            <div class="connector-icons connector-icon-aws-sqs"></div>
+            <div class="connector-title">AWS SQS</div>
+                            <span class="connector-category-badge">Message Queueing Service</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-web-application-firewall">
+            <div class="connector-icons connector-icon-aws-web-application-firewall"></div>
+            <div class="connector-title">AWS WAF</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/aws-waf-classic">
+            <div class="connector-icons connector-icon-aws-waf-classic"></div>
+            <div class="connector-title">AWS WAF Classic</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/axios-assyst">
+            <div class="connector-icons connector-icon-axios-assyst"></div>
+            <div class="connector-title">Axios Assyst</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/axonius">
+            <div class="connector-icons connector-icon-axonius"></div>
+            <div class="connector-title">Axonius</div>
+                            <span class="connector-category-badge">Asset Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure_active_directory">
+            <div class="connector-icons connector-icon-azure_active_directory"></div>
+            <div class="connector-title">Azure Active Directory</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-storage-blob">
+            <div class="connector-icons connector-icon-azure-storage-blob"></div>
+            <div class="connector-title">Azure Blob Storage</div>
+                            <span class="connector-category-badge">IT Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-commands">
+            <div class="connector-icons connector-icon-azure-commands"></div>
+            <div class="connector-title">Azure Commands</div>
+                            <span class="connector-category-badge">Asset Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-compute">
+            <div class="connector-icons connector-icon-azure-compute"></div>
+            <div class="connector-title">Azure Compute</div>
+                            <span class="connector-category-badge">Compute Platform</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-cosmos-db">
+            <div class="connector-icons connector-icon-azure-cosmos-db"></div>
+            <div class="connector-title">Azure Cosmos DB</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-devops">
+            <div class="connector-icons connector-icon-azure-devops"></div>
+            <div class="connector-title">Azure DevOps</div>
+                            <span class="connector-category-badge">Source Code Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-firewall">
+            <div class="connector-icons connector-icon-azure-firewall"></div>
+            <div class="connector-title">Azure Firewall</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-front-door">
+            <div class="connector-icons connector-icon-azure-front-door"></div>
+            <div class="connector-title">Azure Front Door WAF</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-key-vault">
+            <div class="connector-icons connector-icon-azure-key-vault"></div>
+            <div class="connector-title">Azure Key Vault</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-kubernetes-services">
+            <div class="connector-icons connector-icon-azure-kubernetes-services"></div>
+            <div class="connector-title">Azure Kubernetes Services</div>
+                            <span class="connector-category-badge">Container Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-log-analytics">
+            <div class="connector-icons connector-icon-azure-log-analytics"></div>
+            <div class="connector-title">Azure Log Analytics</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-network-security-group">
+            <div class="connector-icons connector-icon-azure-network-security-group"></div>
+            <div class="connector-title">Azure Network Security Group</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azurenotificationhub">
+            <div class="connector-icons connector-icon-azurenotificationhub"></div>
+            <div class="connector-title">Azure Notification Hub</div>
+                            <span class="connector-category-badge">IT Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-resource-health">
+            <div class="connector-icons connector-icon-azure-resource-health"></div>
+            <div class="connector-title">Azure Resource Health</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure_sentinel">
+            <div class="connector-icons connector-icon-azure_sentinel"></div>
+            <div class="connector-title">Azure Sentinel</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-storage">
+            <div class="connector-icons connector-icon-azure-storage"></div>
+            <div class="connector-title">Azure Storage</div>
+                            <span class="connector-category-badge">IT Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-storage-table">
+            <div class="connector-icons connector-icon-azure-storage-table"></div>
+            <div class="connector-title">Azure Storage Table</div>
+                            <span class="connector-category-badge">IT Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/azure-web-application-firewall">
+            <div class="connector-icons connector-icon-azure-web-application-firewall"></div>
+            <div class="connector-title">Azure Web Application Firewall</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bambenek-feed">
+            <div class="connector-icons connector-icon-bambenek-feed"></div>
+            <div class="connector-title">Bambenek Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bandwidth">
+            <div class="connector-icons connector-icon-bandwidth"></div>
+            <div class="connector-title">Bandwidth</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/baracuddarepblocklist">
+            <div class="connector-icons connector-icon-baracuddarepblocklist"></div>
+            <div class="connector-title">Barracuda Reputation Block List</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/berryio">
+            <div class="connector-icons connector-icon-berryio"></div>
+            <div class="connector-title">BerryIO</div>
+                            <span class="connector-category-badge">OT &amp; IoT Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/beyondtrust-privileged-remote-access">
+            <div class="connector-icons connector-icon-beyondtrust-privileged-remote-access"></div>
+            <div class="connector-title">BeyondTrust Privileged Remote Access</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/binaryedge">
+            <div class="connector-icons connector-icon-binaryedge"></div>
+            <div class="connector-title">BinaryEdge</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bitbucket">
+            <div class="connector-icons connector-icon-bitbucket"></div>
+            <div class="connector-title">Bitbucket</div>
+                            <span class="connector-category-badge">Source Code Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bitcoinabusedb">
+            <div class="connector-icons connector-icon-bitcoinabusedb"></div>
+            <div class="connector-title">Bitcoin Abuse DB</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bitdefender">
+            <div class="connector-icons connector-icon-bitdefender"></div>
+            <div class="connector-title">BitDefender</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bitsight">
+            <div class="connector-icons connector-icon-bitsight"></div>
+            <div class="connector-title">BitSight</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/blocklist-de">
+            <div class="connector-icons connector-icon-blocklist-de"></div>
+            <div class="connector-title">Blocklist.de Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/blueliv">
+            <div class="connector-icons connector-icon-blueliv"></div>
+            <div class="connector-title">Blueliv Threat Compass</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bluvector">
+            <div class="connector-icons connector-icon-bluvector"></div>
+            <div class="connector-title">BluVector</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bmc-discovery">
+            <div class="connector-icons connector-icon-bmc-discovery"></div>
+            <div class="connector-title">BMC Discovery</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bmc_remedy_ar_system">
+            <div class="connector-icons connector-icon-bmc_remedy_ar_system"></div>
+            <div class="connector-title">BMC Remedy</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bmc_remedyforce">
+            <div class="connector-icons connector-icon-bmc_remedyforce"></div>
+            <div class="connector-title">BMC RemedyForce</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/botvrij">
+            <div class="connector-icons connector-icon-botvrij"></div>
+            <div class="connector-title">Botvrij.eu MISP OSINT Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/box">
+            <div class="connector-icons connector-icon-box"></div>
+            <div class="connector-title">Box</div>
+                            <span class="connector-category-badge">IT Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bpmn-new">
+            <div class="connector-icons connector-icon-bpmn-new"></div>
+            <div class="connector-title">BPMN Connector</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bruteforceblocker-feed">
+            <div class="connector-icons connector-icon-bruteforceblocker-feed"></div>
+            <div class="connector-title">BruteForceBlocker Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/carbon_black_logo">
+            <div class="connector-icons connector-icon-carbon_black_logo"></div>
+            <div class="connector-title">CarbonBlack Defense</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/carbon-black-protection">
+            <div class="connector-icons connector-icon-carbon-black-protection"></div>
+            <div class="connector-title">CarbonBlack Protect Bit9</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cb-response">
+            <div class="connector-icons connector-icon-cb-response"></div>
+            <div class="connector-title">CarbonBlack Response</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/censys">
+            <div class="connector-icons connector-icon-censys"></div>
+            <div class="connector-title">Censys</div>
+                            <span class="connector-category-badge">Attack surface management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/centreon">
+            <div class="connector-icons connector-icon-centreon"></div>
+            <div class="connector-title">Centreon</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/check-host">
+            <div class="connector-icons connector-icon-check-host"></div>
+            <div class="connector-title">Check Host</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/checkphish">
+            <div class="connector-icons connector-icon-checkphish"></div>
+            <div class="connector-title">Check Phish</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/checkpoint-firewall">
+            <div class="connector-icons connector-icon-checkpoint-firewall"></div>
+            <div class="connector-title">Check Point Firewall</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/check-point-management-console">
+            <div class="connector-icons connector-icon-check-point-management-console"></div>
+            <div class="connector-title">Check Point Management Console</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/checkpointsandblastappliance">
+            <div class="connector-icons connector-icon-checkpointsandblastappliance"></div>
+            <div class="connector-title">Check Point Sandblast Appliance</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/checkpointsandblastcloud">
+            <div class="connector-icons connector-icon-checkpointsandblastcloud"></div>
+            <div class="connector-title">Check Point Sandblast Cloud</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cherwell">
+            <div class="connector-icons connector-icon-cherwell"></div>
+            <div class="connector-title">Cherwell</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cicd-utils">
+            <div class="connector-icons connector-icon-cicd-utils"></div>
+            <div class="connector-title">CICD Utils</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cins-army">
+            <div class="connector-icons connector-icon-cins-army"></div>
+            <div class="connector-title">CINS Army Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/circlcvesearch">
+            <div class="connector-icons connector-icon-circlcvesearch"></div>
+            <div class="connector-title">Circl CVE Search</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/circleci">
+            <div class="connector-icons connector-icon-circleci"></div>
+            <div class="connector-title">CircleCI</div>
+                            <span class="connector-category-badge">DevOps and Digital Operations</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisaadvisory">
+            <div class="connector-icons connector-icon-cisaadvisory"></div>
+            <div class="connector-title">CISA Advisory</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-threat-grid">
+            <div class="connector-icons connector-icon-cisco-threat-grid"></div>
+            <div class="connector-title">Cisco  Threat Grid</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-amp">
+            <div class="connector-icons connector-icon-cisco-amp"></div>
+            <div class="connector-title">Cisco AMP for Endpoints</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-asa">
+            <div class="connector-icons connector-icon-cisco-asa"></div>
+            <div class="connector-title">Cisco ASA</div>
+                            <span class="connector-category-badge">Security Posture Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco_catalyst">
+            <div class="connector-icons connector-icon-cisco_catalyst"></div>
+            <div class="connector-title">Cisco Catalyst</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-esa">
+            <div class="connector-icons connector-icon-cisco-esa"></div>
+            <div class="connector-title">Cisco ESA</div>
+                            <span class="connector-category-badge">Email Gateway</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-esa-rest">
+            <div class="connector-icons connector-icon-cisco-esa-rest"></div>
+            <div class="connector-title">Cisco ESA (REST)</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco_firepower">
+            <div class="connector-icons connector-icon-cisco_firepower"></div>
+            <div class="connector-title">Cisco Firepower</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-ise">
+            <div class="connector-icons connector-icon-cisco-ise"></div>
+            <div class="connector-title">Cisco ISE</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-meraki">
+            <div class="connector-icons connector-icon-cisco-meraki"></div>
+            <div class="connector-title">Cisco Meraki Dashboard</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-meraki-mx-l3">
+            <div class="connector-icons connector-icon-cisco-meraki-mx-l3"></div>
+            <div class="connector-title">Cisco Meraki MX L3 Firewall</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-meraki-mx-l7">
+            <div class="connector-icons connector-icon-cisco-meraki-mx-l7"></div>
+            <div class="connector-title">Cisco Meraki MX L7 Firewall</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-meraki-mx-vpn">
+            <div class="connector-icons connector-icon-cisco-meraki-mx-vpn"></div>
+            <div class="connector-title">Cisco Meraki MX VPN Firewall</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco_SMA">
+            <div class="connector-icons connector-icon-cisco_SMA"></div>
+            <div class="connector-title">Cisco SMA</div>
+                            <span class="connector-category-badge">Security Posture Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ciscospark">
+            <div class="connector-icons connector-icon-ciscospark"></div>
+            <div class="connector-title">Cisco Spark</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco_stealthwatch">
+            <div class="connector-icons connector-icon-cisco_stealthwatch"></div>
+            <div class="connector-title">Cisco StealthWatch</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/talos-feed">
+            <div class="connector-icons connector-icon-talos-feed"></div>
+            <div class="connector-title">Cisco Talos Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-talos">
+            <div class="connector-icons connector-icon-cisco-talos"></div>
+            <div class="connector-title">Cisco Talos Threat Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-umbrella">
+            <div class="connector-icons connector-icon-cisco-umbrella"></div>
+            <div class="connector-title">Cisco Umbrella Enforcement</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cisco-umbrella-investigate">
+            <div class="connector-icons connector-icon-cisco-umbrella-investigate"></div>
+            <div class="connector-title">Cisco Umbrella Investigate</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/citrix-netscaler-vpx">
+            <div class="connector-icons connector-icon-citrix-netscaler-vpx"></div>
+            <div class="connector-title">Citrix NetScaler VPX</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/claroty">
+            <div class="connector-icons connector-icon-claroty"></div>
+            <div class="connector-title">Claroty</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/claroty-xdome">
+            <div class="connector-icons connector-icon-claroty-xdome"></div>
+            <div class="connector-title">Claroty xDOME</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/clicksend">
+            <div class="connector-icons connector-icon-clicksend"></div>
+            <div class="connector-title">ClickSend</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cloudera_edh">
+            <div class="connector-icons connector-icon-cloudera_edh"></div>
+            <div class="connector-title">Cloudera EDH</div>
+                            <span class="connector-category-badge">ML Service</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cloudflare-waf-new">
+            <div class="connector-icons connector-icon-cloudflare-waf-new"></div>
+            <div class="connector-title">Cloudflare WAF</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cloudpassage">
+            <div class="connector-icons connector-icon-cloudpassage"></div>
+            <div class="connector-title">CloudPassage Halo</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/codesnippet-new">
+            <div class="connector-icons connector-icon-codesnippet-new"></div>
+            <div class="connector-title">Code Snippet Connector</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/code42">
+            <div class="connector-icons connector-icon-code42"></div>
+            <div class="connector-title">Code42</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cofense_triage">
+            <div class="connector-icons connector-icon-cofense_triage"></div>
+            <div class="connector-title">Cofense Triage</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cofensevision">
+            <div class="connector-icons connector-icon-cofensevision"></div>
+            <div class="connector-title">Cofense Vision</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/commvault">
+            <div class="connector-icons connector-icon-commvault"></div>
+            <div class="connector-title">Commvault</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/connectwise-1">
+            <div class="connector-icons connector-icon-connectwise-1"></div>
+            <div class="connector-title">ConnectWise Manage</div>
+                            <span class="connector-category-badge">Automation controller</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/coralogix">
+            <div class="connector-icons connector-icon-coralogix"></div>
+            <div class="connector-title">Coralogix</div>
+                            <span class="connector-category-badge">Logging</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/criminal-ip">
+            <div class="connector-icons connector-icon-criminal-ip"></div>
+            <div class="connector-title">Criminal IP</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/crits">
+            <div class="connector-icons connector-icon-crits"></div>
+            <div class="connector-title">CRITs</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/crowdsec-cyber-threat-intelligence">
+            <div class="connector-icons connector-icon-crowdsec-cyber-threat-intelligence"></div>
+            <div class="connector-title">CrowdSec Cyber Threat Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/crowdstrike-falcon">
+            <div class="connector-icons connector-icon-crowdstrike-falcon"></div>
+            <div class="connector-title">CrowdStrike Falcon</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/croudstrike-intel">
+            <div class="connector-icons connector-icon-croudstrike-intel"></div>
+            <div class="connector-title">CrowdStrike Falcon Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/crowdstrike-falcon-logscale">
+            <div class="connector-icons connector-icon-crowdstrike-falcon-logscale"></div>
+            <div class="connector-title">CrowdStrike Falcon LogScale</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/crowdstrike_falcon_sandbox">
+            <div class="connector-icons connector-icon-crowdstrike_falcon_sandbox"></div>
+            <div class="connector-title">CrowdStrike Falcon Sandbox</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/crowdstrikefalconx">
+            <div class="connector-icons connector-icon-crowdstrikefalconx"></div>
+            <div class="connector-title">CrowdStrike Falcon X</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/crowdstrike-identity-platform">
+            <div class="connector-icons connector-icon-crowdstrike-identity-platform"></div>
+            <div class="connector-title">CrowdStrike Identity Platform</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/crowdstrike-intel-indicators">
+            <div class="connector-icons connector-icon-crowdstrike-intel-indicators"></div>
+            <div class="connector-title">CrowdStrike Intel Indicators</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/csvdatamngtnew">
+            <div class="connector-icons connector-icon-csvdatamngtnew"></div>
+            <div class="connector-title">CSV Data Management</div>
+                            <span class="connector-category-badge">Case Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ctm360-cyberblindspot">
+            <div class="connector-icons connector-icon-ctm360-cyberblindspot"></div>
+            <div class="connector-title">CTM360 CyberBlindspot</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ctm360-cyna">
+            <div class="connector-icons connector-icon-ctm360-cyna"></div>
+            <div class="connector-title">CTM360 CyNA</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ctm360-hackerview">
+            <div class="connector-icons connector-icon-ctm360-hackerview"></div>
+            <div class="connector-title">CTM360 HackerView</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cuckoo">
+            <div class="connector-icons connector-icon-cuckoo"></div>
+            <div class="connector-title">Cuckoo</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cyber-triage">
+            <div class="connector-icons connector-icon-cyber-triage"></div>
+            <div class="connector-title">Cyber Triage</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cyberark">
+            <div class="connector-icons connector-icon-cyberark"></div>
+            <div class="connector-title">CyberArk</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cyberark-aim">
+            <div class="connector-icons connector-icon-cyberark-aim"></div>
+            <div class="connector-title">CyberArk AIM</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cybereason">
+            <div class="connector-icons connector-icon-cybereason"></div>
+            <div class="connector-title">Cybereason</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cybereason-threat-intel">
+            <div class="connector-icons connector-icon-cybereason-threat-intel"></div>
+            <div class="connector-title">Cybereason Threat Intel</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cyberint">
+            <div class="connector-icons connector-icon-cyberint"></div>
+            <div class="connector-title">Cyberint</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cybersixgill">
+            <div class="connector-icons connector-icon-cybersixgill"></div>
+            <div class="connector-title">Cybersixgill</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cyble-vision">
+            <div class="connector-icons connector-icon-cyble-vision"></div>
+            <div class="connector-title">Cyble Vision</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cylance">
+            <div class="connector-icons connector-icon-cylance"></div>
+            <div class="connector-title">Cylance Protect</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cymon">
+            <div class="connector-icons connector-icon-cymon"></div>
+            <div class="connector-title">Cymon</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cymulate-asm">
+            <div class="connector-icons connector-icon-cymulate-asm"></div>
+            <div class="connector-title">Cymulate ASM</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cymulate-endpoint-security-bas">
+            <div class="connector-icons connector-icon-cymulate-endpoint-security-bas"></div>
+            <div class="connector-title">Cymulate Endpoint Security BAS</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cymulate-full-kill-chain-campaign-cart">
+            <div class="connector-icons connector-icon-cymulate-full-kill-chain-campaign-cart"></div>
+            <div class="connector-title">Cymulate Full Kill Chain Campaign CART</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cymulate-phishing-awareness-bas">
+            <div class="connector-icons connector-icon-cymulate-phishing-awareness-bas"></div>
+            <div class="connector-title">Cymulate Phishing Awareness BAS</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cymulate-web-application-firewall-bas">
+            <div class="connector-icons connector-icon-cymulate-web-application-firewall-bas"></div>
+            <div class="connector-title">Cymulate Web Application Firewall BAS</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cyolo">
+            <div class="connector-icons connector-icon-cyolo"></div>
+            <div class="connector-title">Cyolo</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cyren">
+            <div class="connector-icons connector-icon-cyren"></div>
+            <div class="connector-title">Cyren</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cyware">
+            <div class="connector-icons connector-icon-cyware"></div>
+            <div class="connector-title">Cyware</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ctix">
+            <div class="connector-icons connector-icon-ctix"></div>
+            <div class="connector-title">Cyware CTIX</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cyware-ctix-feed">
+            <div class="connector-icons connector-icon-cyware-ctix-feed"></div>
+            <div class="connector-title">Cyware CTIX Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/darkowl">
+            <div class="connector-icons connector-icon-darkowl"></div>
+            <div class="connector-title">DarkOwl</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/darktrace">
+            <div class="connector-icons connector-icon-darktrace"></div>
+            <div class="connector-title">Darktrace</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/db-new">
+            <div class="connector-icons connector-icon-db-new"></div>
+            <div class="connector-title">Database</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/databricks">
+            <div class="connector-icons connector-icon-databricks"></div>
+            <div class="connector-title">Databricks</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/datadog">
+            <div class="connector-icons connector-icon-datadog"></div>
+            <div class="connector-title">Datadog Cloud SIEM</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/debug-utils">
+            <div class="connector-icons connector-icon-debug-utils"></div>
+            <div class="connector-title">Debug Utils</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/delineasecretserver">
+            <div class="connector-icons connector-icon-delineasecretserver"></div>
+            <div class="connector-title">Delinea Secret Server</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/devo">
+            <div class="connector-icons connector-icon-devo"></div>
+            <div class="connector-title">Devo</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/digitalshadows">
+            <div class="connector-icons connector-icon-digitalshadows"></div>
+            <div class="connector-title">Digital Shadows</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/digital-shadows-searchlight">
+            <div class="connector-icons connector-icon-digital-shadows-searchlight"></div>
+            <div class="connector-title">Digital Shadows SearchLight</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/dns">
+            <div class="connector-icons connector-icon-dns"></div>
+            <div class="connector-title">DNS</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/dnstools">
+            <div class="connector-icons connector-icon-dnstools"></div>
+            <div class="connector-title">DNSTools</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/dnstwist">
+            <div class="connector-icons connector-icon-dnstwist"></div>
+            <div class="connector-title">DNSTwist</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/domain-analysis">
+            <div class="connector-icons connector-icon-domain-analysis"></div>
+            <div class="connector-title">Domain Analysis</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/domaintools">
+            <div class="connector-icons connector-icon-domaintools"></div>
+            <div class="connector-title">DomainTools</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/doppel">
+            <div class="connector-icons connector-icon-doppel"></div>
+            <div class="connector-title">Doppel</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/dragos-sitestore">
+            <div class="connector-icons connector-icon-dragos-sitestore"></div>
+            <div class="connector-title">Dragos SiteStore</div>
+                            <span class="connector-category-badge">Asset Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/dragos-worldview">
+            <div class="connector-icons connector-icon-dragos-worldview"></div>
+            <div class="connector-title">Dragos Worldview Threat Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/dshield">
+            <div class="connector-icons connector-icon-dshield"></div>
+            <div class="connector-title">DShield</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ducont-sms">
+            <div class="connector-icons connector-icon-ducont-sms"></div>
+            <div class="connector-title">Ducont SMS</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/duo">
+            <div class="connector-icons connector-icon-duo"></div>
+            <div class="connector-title">Duo</div>
+                            <span class="connector-category-badge">Authentication</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/easyvista">
+            <div class="connector-icons connector-icon-easyvista"></div>
+            <div class="connector-title">EasyVista</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/eclecticiq">
+            <div class="connector-icons connector-icon-eclecticiq"></div>
+            <div class="connector-title">EclecticIQ</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/elastic-kibana">
+            <div class="connector-icons connector-icon-elastic-kibana"></div>
+            <div class="connector-title">Elastic Kibana</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/elastic-security">
+            <div class="connector-icons connector-icon-elastic-security"></div>
+            <div class="connector-title">Elastic Security</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/elasticsearch">
+            <div class="connector-icons connector-icon-elasticsearch"></div>
+            <div class="connector-title">ElasticSearch</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/email_rep">
+            <div class="connector-icons connector-icon-email_rep"></div>
+            <div class="connector-title">EmailRep</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/empire">
+            <div class="connector-icons connector-icon-empire"></div>
+            <div class="connector-title">Empire</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/endgame">
+            <div class="connector-icons connector-icon-endgame"></div>
+            <div class="connector-title">Endgame</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/eset-protect-enterprise">
+            <div class="connector-icons connector-icon-eset-protect-enterprise"></div>
+            <div class="connector-title">ESET Protect Enterprise</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/everbridge">
+            <div class="connector-icons connector-icon-everbridge"></div>
+            <div class="connector-title">Everbridge</div>
+                            <span class="connector-category-badge">OT &amp; IoT Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/exabeam">
+            <div class="connector-icons connector-icon-exabeam"></div>
+            <div class="connector-title">Exabeam</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/exabeamdatalake">
+            <div class="connector-icons connector-icon-exabeamdatalake"></div>
+            <div class="connector-title">Exabeam Data Lake</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/excel-tools">
+            <div class="connector-icons connector-icon-excel-tools"></div>
+            <div class="connector-title">Excel Tools</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/exchange">
+            <div class="connector-icons connector-icon-exchange"></div>
+            <div class="connector-title">Exchange</div>
+                            <span class="connector-category-badge">Email Server</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/epss">
+            <div class="connector-icons connector-icon-epss"></div>
+            <div class="connector-title">Exploit Prediction Scoring System (EPSS)</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/extrahop">
+            <div class="connector-icons connector-icon-extrahop"></div>
+            <div class="connector-title">ExtraHop</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/f5-big-ip">
+            <div class="connector-icons connector-icon-f5-big-ip"></div>
+            <div class="connector-title">F5 BIG IP</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/f5_big_ip_waf">
+            <div class="connector-icons connector-icon-f5_big_ip_waf"></div>
+            <div class="connector-title">F5 BIG-IP WAF</div>
+                            <span class="connector-category-badge">Web Application</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/facebook-threat-exchange-1">
+            <div class="connector-icons connector-icon-facebook-threat-exchange-1"></div>
+            <div class="connector-title">Facebook ThreatExchange</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/farsight-security">
+            <div class="connector-icons connector-icon-farsight-security"></div>
+            <div class="connector-title">Farsight Security DNSDB</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fastly-next-gen-waf">
+            <div class="connector-icons connector-icon-fastly-next-gen-waf"></div>
+            <div class="connector-title">Fastly Next-Gen WAF</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/feodotracker">
+            <div class="connector-icons connector-icon-feodotracker"></div>
+            <div class="connector-title">FeodoTracker</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fidelis-edr">
+            <div class="connector-icons connector-icon-fidelis-edr"></div>
+            <div class="connector-title">Fidelis EDR</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/filecontentextraction">
+            <div class="connector-icons connector-icon-filecontentextraction"></div>
+            <div class="connector-title">File Content Extraction</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fireeye_ax">
+            <div class="connector-icons connector-icon-fireeye_ax"></div>
+            <div class="connector-title">FireEye AX</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fireeye">
+            <div class="connector-icons connector-icon-fireeye"></div>
+            <div class="connector-title">FireEye CMS</div>
+                            <span class="connector-category-badge">Security Posture Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fireeyedetection">
+            <div class="connector-icons connector-icon-fireeyedetection"></div>
+            <div class="connector-title">FireEye Detection On Demand</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fireeyeetp">
+            <div class="connector-icons connector-icon-fireeyeetp"></div>
+            <div class="connector-title">FireEye ETP</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fireeye_ex">
+            <div class="connector-icons connector-icon-fireeye_ex"></div>
+            <div class="connector-title">FireEye EX</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fireeyehelix">
+            <div class="connector-icons connector-icon-fireeyehelix"></div>
+            <div class="connector-title">FireEye Helix</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fireeye_hx">
+            <div class="connector-icons connector-icon-fireeye_hx"></div>
+            <div class="connector-title">FireEye HX</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fireeye_isight">
+            <div class="connector-icons connector-icon-fireeye_isight"></div>
+            <div class="connector-title">FireEye iSIGHT</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fireeye_nx">
+            <div class="connector-icons connector-icon-fireeye_nx"></div>
+            <div class="connector-title">FireEye NX</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/focsec">
+            <div class="connector-icons connector-icon-focsec"></div>
+            <div class="connector-title">Focsec</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/forcepoint-dlp">
+            <div class="connector-icons connector-icon-forcepoint-dlp"></div>
+            <div class="connector-title">Forcepoint DLP</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/forcepoint_websense">
+            <div class="connector-icons connector-icon-forcepoint_websense"></div>
+            <div class="connector-title">Forcepoint Websense</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/forescout">
+            <div class="connector-icons connector-icon-forescout"></div>
+            <div class="connector-title">Forescout</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/foresight">
+            <div class="connector-icons connector-icon-foresight"></div>
+            <div class="connector-title">Foresight</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/forticloud-asset-management">
+            <div class="connector-icons connector-icon-forticloud-asset-management"></div>
+            <div class="connector-title">FortiCloud Asset Management</div>
+                            <span class="connector-category-badge">Asset Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortianalyzer">
+            <div class="connector-icons connector-icon-fortianalyzer"></div>
+            <div class="connector-title">Fortinet FortiAnalyzer</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-fortiappsec-cloud">
+            <div class="connector-icons connector-icon-fortinet-fortiappsec-cloud"></div>
+            <div class="connector-title">Fortinet FortiAppSec Cloud</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortiauthenticator">
+            <div class="connector-icons connector-icon-fortiauthenticator"></div>
+            <div class="connector-title">Fortinet FortiAuthenticator</div>
+                            <span class="connector-category-badge">Authentication</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/forticasb">
+            <div class="connector-icons connector-icon-forticasb"></div>
+            <div class="connector-title">Fortinet FortiCASB</div>
+                            <span class="connector-category-badge">Cloud access security broker (CASB)</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/forticlient-ems">
+            <div class="connector-icons connector-icon-forticlient-ems"></div>
+            <div class="connector-title">Fortinet FortiClient EMS</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-forticnp">
+            <div class="connector-icons connector-icon-fortinet-forticnp"></div>
+            <div class="connector-title">Fortinet FortiCNP</div>
+                            <span class="connector-category-badge">Investigation</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/forticwp">
+            <div class="connector-icons connector-icon-forticwp"></div>
+            <div class="connector-title">Fortinet FortiCWP</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortiddos">
+            <div class="connector-icons connector-icon-fortiddos"></div>
+            <div class="connector-title">Fortinet FortiDDoS</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-fortideceptor">
+            <div class="connector-icons connector-icon-fortinet-fortideceptor"></div>
+            <div class="connector-title">Fortinet FortiDeceptor</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-fortidlp">
+            <div class="connector-icons connector-icon-fortinet-fortidlp"></div>
+            <div class="connector-title">Fortinet FortiDLP</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortiedr">
+            <div class="connector-icons connector-icon-fortiedr"></div>
+            <div class="connector-title">Fortinet FortiEDR</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-fortiflex">
+            <div class="connector-icons connector-icon-fortinet-fortiflex"></div>
+            <div class="connector-title">Fortinet FortiFlex</div>
+                            <span class="connector-category-badge">Asset Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortigate_firewall">
+            <div class="connector-icons connector-icon-fortigate_firewall"></div>
+            <div class="connector-title">Fortinet FortiGate</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-fortiguard-ioc">
+            <div class="connector-icons connector-icon-fortinet-fortiguard-ioc"></div>
+            <div class="connector-title">Fortinet FortiGuard IOC</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortiguardlabs">
+            <div class="connector-icons connector-icon-fortiguardlabs"></div>
+            <div class="connector-title">Fortinet FortiGuard Labs</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-fortiguard-outbreak">
+            <div class="connector-icons connector-icon-fortinet-fortiguard-outbreak"></div>
+            <div class="connector-title">Fortinet FortiGuard Outbreak</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortiguardlabthreatintel">
+            <div class="connector-icons connector-icon-fortiguardlabthreatintel"></div>
+            <div class="connector-title">Fortinet FortiGuard Threat Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortimail">
+            <div class="connector-icons connector-icon-fortimail"></div>
+            <div class="connector-title">Fortinet FortiMail</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortimanager">
+            <div class="connector-icons connector-icon-fortimanager"></div>
+            <div class="connector-title">Fortinet FortiManager</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-fortimanager-json-rpc">
+            <div class="connector-icons connector-icon-fortinet-fortimanager-json-rpc"></div>
+            <div class="connector-title">Fortinet FortiManager JSON RPC</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortimonitor-latest">
+            <div class="connector-icons connector-icon-fortimonitor-latest"></div>
+            <div class="connector-title">Fortinet FortiMonitor</div>
+                            <span class="connector-category-badge">Monitoring</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinac">
+            <div class="connector-icons connector-icon-fortinac"></div>
+            <div class="connector-title">Fortinet FortiNAC</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortindr">
+            <div class="connector-icons connector-icon-fortindr"></div>
+            <div class="connector-title">Fortinet FortiNDR</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortindr-cloud">
+            <div class="connector-icons connector-icon-fortindr-cloud"></div>
+            <div class="connector-title">Fortinet FortiNDR Cloud</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet_fortios">
+            <div class="connector-icons connector-icon-fortinet_fortios"></div>
+            <div class="connector-title">Fortinet FortiOS</div>
+                            <span class="connector-category-badge">Compute Platform</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-fortipam">
+            <div class="connector-icons connector-icon-fortinet-fortipam"></div>
+            <div class="connector-title">Fortinet FortiPAM</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortiproxy">
+            <div class="connector-icons connector-icon-fortiproxy"></div>
+            <div class="connector-title">Fortinet FortiProxy</div>
+                            <span class="connector-category-badge">Web Application</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortirecon-aci">
+            <div class="connector-icons connector-icon-fortirecon-aci"></div>
+            <div class="connector-title">Fortinet FortiRecon ACI</div>
+                            <span class="connector-category-badge">Attack surface management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortirecon-brand-protection">
+            <div class="connector-icons connector-icon-fortirecon-brand-protection"></div>
+            <div class="connector-title">Fortinet FortiRecon Brand Protection</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-fortirecon-easm">
+            <div class="connector-icons connector-icon-fortinet-fortirecon-easm"></div>
+            <div class="connector-title">Fortinet FortiRecon EASM</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortisandbox">
+            <div class="connector-icons connector-icon-fortisandbox"></div>
+            <div class="connector-title">Fortinet FortiSandbox</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-fortisase">
+            <div class="connector-icons connector-icon-fortinet-fortisase"></div>
+            <div class="connector-title">Fortinet FortiSASE</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortisiem">
+            <div class="connector-icons connector-icon-fortisiem"></div>
+            <div class="connector-title">Fortinet FortiSIEM</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortivoice">
+            <div class="connector-icons connector-icon-fortivoice"></div>
+            <div class="connector-title">Fortinet FortiVoice</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-fortiweb">
+            <div class="connector-icons connector-icon-fortinet-fortiweb"></div>
+            <div class="connector-title">Fortinet FortiWeb</div>
+                            <span class="connector-category-badge">Web Application</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortinet-fortiweb-cloud">
+            <div class="connector-icons connector-icon-fortinet-fortiweb-cloud"></div>
+            <div class="connector-title">Fortinet FortiWeb Cloud</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/Fortinet-Web-Filter">
+            <div class="connector-icons connector-icon-Fortinet-Web-Filter"></div>
+            <div class="connector-title">Fortinet Web Filter Lookup</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fsrforteams">
+            <div class="connector-icons connector-icon-fsrforteams"></div>
+            <div class="connector-title">FortiSOAR For Microsoft Teams Application</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fsrforslack">
+            <div class="connector-icons connector-icon-fsrforslack"></div>
+            <div class="connector-title">FortiSOAR For Slack Application</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mleng-new">
+            <div class="connector-icons connector-icon-mleng-new"></div>
+            <div class="connector-title">FortiSOAR ML Engine Connector</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fsrwordtemplating">
+            <div class="connector-icons connector-icon-fsrwordtemplating"></div>
+            <div class="connector-title">FortiSOAR MS Word Report Templating</div>
+                            <span class="connector-category-badge">Compliance and Reporting</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/rapiddevkit">
+            <div class="connector-icons connector-icon-rapiddevkit"></div>
+            <div class="connector-title">FortiSOAR Rapid Development Kit</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fortisoar">
+            <div class="connector-icons connector-icon-fortisoar"></div>
+            <div class="connector-title">FortiSOAR SOC Simulator</div>
+                            <span class="connector-category-badge">FortiSOAR Essentials</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/common-content">
+            <div class="connector-icons connector-icon-common-content"></div>
+            <div class="connector-title">FortiSOAR™ Built-in connectors</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/freshservicedesk">
+            <div class="connector-icons connector-icon-freshservicedesk"></div>
+            <div class="connector-title">Freshservice Service Desk</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/agentcommbridge-new">
+            <div class="connector-icons connector-icon-agentcommbridge-new"></div>
+            <div class="connector-title">FSR Agent Communication Bridge</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fullhunt">
+            <div class="connector-icons connector-icon-fullhunt"></div>
+            <div class="connector-title">FullHunt</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/fuzzysearch">
+            <div class="connector-icons connector-icon-fuzzysearch"></div>
+            <div class="connector-title">Fuzzy Search</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/gcp-certificate">
+            <div class="connector-icons connector-icon-gcp-certificate"></div>
+            <div class="connector-title">GCP CA Service</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/gigamon">
+            <div class="connector-icons connector-icon-gigamon"></div>
+            <div class="connector-title">Gigamon</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/gitguardian">
+            <div class="connector-icons connector-icon-gitguardian"></div>
+            <div class="connector-title">GitGuardian</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/gitguardian-enterprise">
+            <div class="connector-icons connector-icon-gitguardian-enterprise"></div>
+            <div class="connector-title">GitGuardian Enterprise</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/github">
+            <div class="connector-icons connector-icon-github"></div>
+            <div class="connector-title">GitHub</div>
+                            <span class="connector-category-badge">Source Code Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/gitlab">
+            <div class="connector-icons connector-icon-gitlab"></div>
+            <div class="connector-title">GitLab</div>
+                            <span class="connector-category-badge">DevOps and Digital Operations</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/goanywhere">
+            <div class="connector-icons connector-icon-goanywhere"></div>
+            <div class="connector-title">GoAnywhere</div>
+                            <span class="connector-category-badge">IT Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/gogetssl">
+            <div class="connector-icons connector-icon-gogetssl"></div>
+            <div class="connector-title">GoGetSSL</div>
+                            <span class="connector-category-badge">Authentication</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-bard">
+            <div class="connector-icons connector-icon-google-bard"></div>
+            <div class="connector-title">Google Bard</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/bigquery">
+            <div class="connector-icons connector-icon-bigquery"></div>
+            <div class="connector-title">Google BigQuery</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-calendar">
+            <div class="connector-icons connector-icon-google-calendar"></div>
+            <div class="connector-title">Google Calendar</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-chronicle">
+            <div class="connector-icons connector-icon-google-chronicle"></div>
+            <div class="connector-title">Google Chronicle BackStory</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/googlecloudcompute">
+            <div class="connector-icons connector-icon-googlecloudcompute"></div>
+            <div class="connector-title">Google Cloud Compute</div>
+                            <span class="connector-category-badge">Compute Platform</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-cloud-functions">
+            <div class="connector-icons connector-icon-google-cloud-functions"></div>
+            <div class="connector-title">Google Cloud Functions</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-cloud-logging">
+            <div class="connector-icons connector-icon-google-cloud-logging"></div>
+            <div class="connector-title">Google Cloud Logging</div>
+                            <span class="connector-category-badge">Logging</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-cloud-platform-whitelist-feed">
+            <div class="connector-icons connector-icon-google-cloud-platform-whitelist-feed"></div>
+            <div class="connector-title">Google Cloud Platform Whitelist Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-cloud-pub-sub">
+            <div class="connector-icons connector-icon-google-cloud-pub-sub"></div>
+            <div class="connector-title">Google Cloud Pub/Sub</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-cloud-resource-manager">
+            <div class="connector-icons connector-icon-google-cloud-resource-manager"></div>
+            <div class="connector-title">Google Cloud Resource Manager</div>
+                            <span class="connector-category-badge">IT Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-cloud-storage">
+            <div class="connector-icons connector-icon-google-cloud-storage"></div>
+            <div class="connector-title">Google Cloud Storage</div>
+                            <span class="connector-category-badge">Storage</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-cloud-translate">
+            <div class="connector-icons connector-icon-google-cloud-translate"></div>
+            <div class="connector-title">Google Cloud Translate</div>
+                            <span class="connector-category-badge">Compute Platform</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-docs">
+            <div class="connector-icons connector-icon-google-docs"></div>
+            <div class="connector-title">Google Docs</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-dorking">
+            <div class="connector-icons connector-icon-google-dorking"></div>
+            <div class="connector-title">Google Dorking</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-drive">
+            <div class="connector-icons connector-icon-google-drive"></div>
+            <div class="connector-title">Google Drive</div>
+                            <span class="connector-category-badge">IT Service</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-gemini">
+            <div class="connector-icons connector-icon-google-gemini"></div>
+            <div class="connector-title">Google Gemini</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-key-management-service">
+            <div class="connector-icons connector-icon-google-key-management-service"></div>
+            <div class="connector-title">Google Key Management Service</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-maps">
+            <div class="connector-icons connector-icon-google-maps"></div>
+            <div class="connector-title">Google Maps</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-secops">
+            <div class="connector-icons connector-icon-google-secops"></div>
+            <div class="connector-title">Google SecOps SIEM</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-secops-soar">
+            <div class="connector-icons connector-icon-google-secops-soar"></div>
+            <div class="connector-title">Google SecOps SOAR</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-sheets">
+            <div class="connector-icons connector-icon-google-sheets"></div>
+            <div class="connector-title">Google Sheets</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-threat-intelligence">
+            <div class="connector-icons connector-icon-google-threat-intelligence"></div>
+            <div class="connector-title">Google Threat Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-vision-ai">
+            <div class="connector-icons connector-icon-google-vision-ai"></div>
+            <div class="connector-title">Google Vision AI</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/grafana">
+            <div class="connector-icons connector-icon-grafana"></div>
+            <div class="connector-title">Grafana</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/graylog">
+            <div class="connector-icons connector-icon-graylog"></div>
+            <div class="connector-title">Graylog</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/green-snow-feed">
+            <div class="connector-icons connector-icon-green-snow-feed"></div>
+            <div class="connector-title">GreenSnow Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/greynoise">
+            <div class="connector-icons connector-icon-greynoise"></div>
+            <div class="connector-title">GreyNoise</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/group-ib">
+            <div class="connector-icons connector-icon-group-ib"></div>
+            <div class="connector-title">Group IB Threat Intelligence &amp; Attribution Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/gsuite">
+            <div class="connector-icons connector-icon-gsuite"></div>
+            <div class="connector-title">GSuite for GMail</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/hackertarget">
+            <div class="connector-icons connector-icon-hackertarget"></div>
+            <div class="connector-title">Hacker Target</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/harfanglab-edr">
+            <div class="connector-icons connector-icon-harfanglab-edr"></div>
+            <div class="connector-title">HarfangLab EDR</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/hashicorpvault">
+            <div class="connector-icons connector-icon-hashicorpvault"></div>
+            <div class="connector-title">HashiCorp Vault</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/hatching-triage">
+            <div class="connector-icons connector-icon-hatching-triage"></div>
+            <div class="connector-title">Hatching Triage</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/i-been-pwned-connector">
+            <div class="connector-icons connector-icon-i-been-pwned-connector"></div>
+            <div class="connector-title">Have I Been Pwned</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/hikvision">
+            <div class="connector-icons connector-icon-hikvision"></div>
+            <div class="connector-title">Hikvision NVR</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/hipchat">
+            <div class="connector-icons connector-icon-hipchat"></div>
+            <div class="connector-title">Hip Chat</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/honeydb">
+            <div class="connector-icons connector-icon-honeydb"></div>
+            <div class="connector-title">HoneyDB</div>
+                            <span class="connector-category-badge">Deception</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/horizon3ai">
+            <div class="connector-icons connector-icon-horizon3ai"></div>
+            <div class="connector-title">Horizon3.ai</div>
+                            <span class="connector-category-badge">Attack surface management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/hostio">
+            <div class="connector-icons connector-icon-hostio"></div>
+            <div class="connector-title">host.io</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/http">
+            <div class="connector-icons connector-icon-http"></div>
+            <div class="connector-title">HTTP</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/hubspot">
+            <div class="connector-icons connector-icon-hubspot"></div>
+            <div class="connector-title">HubSpot</div>
+                            <span class="connector-category-badge">Ticket Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/hybrid-analysis">
+            <div class="connector-icons connector-icon-hybrid-analysis"></div>
+            <div class="connector-title">Hybrid Analysis</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ibm-bigfix">
+            <div class="connector-icons connector-icon-ibm-bigfix"></div>
+            <div class="connector-title">IBM BigFix</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ibm-iam">
+            <div class="connector-icons connector-icon-ibm-iam"></div>
+            <div class="connector-title">IBM IAM</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ibm_qradar">
+            <div class="connector-icons connector-icon-ibm_qradar"></div>
+            <div class="connector-title">IBM QRadar</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ibm-randori">
+            <div class="connector-icons connector-icon-ibm-randori"></div>
+            <div class="connector-title">IBM Randori</div>
+                            <span class="connector-category-badge">Attack surface management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ibm-guardium-insights">
+            <div class="connector-icons connector-icon-ibm-guardium-insights"></div>
+            <div class="connector-title">IBM Security Guardium Insights</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ibm-qradar-edr">
+            <div class="connector-icons connector-icon-ibm-qradar-edr"></div>
+            <div class="connector-title">IBM Security QRadar EDR</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ibm-security-qradar-soar">
+            <div class="connector-icons connector-icon-ibm-security-qradar-soar"></div>
+            <div class="connector-title">IBM Security QRadar SOAR</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ibm-watson-language-translator">
+            <div class="connector-icons connector-icon-ibm-watson-language-translator"></div>
+            <div class="connector-title">IBM Watson</div>
+                            <span class="connector-category-badge">Translator</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ibm-x">
+            <div class="connector-icons connector-icon-ibm-x"></div>
+            <div class="connector-title">IBM X-Force</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ibm-x-force-threat-intelligence">
+            <div class="connector-icons connector-icon-ibm-x-force-threat-intelligence"></div>
+            <div class="connector-title">IBM X-Force Threat Intelligence Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/illuminate">
+            <div class="connector-icons connector-icon-illuminate"></div>
+            <div class="connector-title">Illuminate</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/illumio-core">
+            <div class="connector-icons connector-icon-illumio-core"></div>
+            <div class="connector-title">Illumio Core</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/imap-new">
+            <div class="connector-icons connector-icon-imap-new"></div>
+            <div class="connector-title">IMAP Connector</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/imperva-counterbreach">
+            <div class="connector-icons connector-icon-imperva-counterbreach"></div>
+            <div class="connector-title">Imperva CounterBreach</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/imperva_incapsula">
+            <div class="connector-icons connector-icon-imperva_incapsula"></div>
+            <div class="connector-title">Imperva Incapsula</div>
+                            <span class="connector-category-badge">Web Application</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/imperva-securesphere">
+            <div class="connector-icons connector-icon-imperva-securesphere"></div>
+            <div class="connector-title">Imperva SecureSphere WAF</div>
+                            <span class="connector-category-badge">Web Application</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/infoblox-bloxone-threat-defense">
+            <div class="connector-icons connector-icon-infoblox-bloxone-threat-defense"></div>
+            <div class="connector-title">Infoblox BloxOne Threat Defense</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/infoblox_ddi">
+            <div class="connector-icons connector-icon-infoblox_ddi"></div>
+            <div class="connector-title">Infoblox DDI</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/infocyte">
+            <div class="connector-icons connector-icon-infocyte"></div>
+            <div class="connector-title">Infocyte</div>
+                            <span class="connector-category-badge">Threat Hunting and Search</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/infraon-itsm">
+            <div class="connector-icons connector-icon-infraon-itsm"></div>
+            <div class="connector-title">Infraon ITSM</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/insidersecurityueba">
+            <div class="connector-icons connector-icon-insidersecurityueba"></div>
+            <div class="connector-title">InsiderSecurity UEBA</div>
+                            <span class="connector-category-badge">Insider Threat</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/intel471">
+            <div class="connector-icons connector-icon-intel471"></div>
+            <div class="connector-title">Intel 471</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/intezer_analyze">
+            <div class="connector-icons connector-icon-intezer_analyze"></div>
+            <div class="connector-title">Intezer Analyze</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ipqualityscore">
+            <div class="connector-icons connector-icon-ipqualityscore"></div>
+            <div class="connector-title">IP Quality Score</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ip-api">
+            <div class="connector-icons connector-icon-ip-api"></div>
+            <div class="connector-title">IP-API</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ipinfo">
+            <div class="connector-icons connector-icon-ipinfo"></div>
+            <div class="connector-title">ipinfo.io</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ipstack">
+            <div class="connector-icons connector-icon-ipstack"></div>
+            <div class="connector-title">IPStack</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ipsum-threat-intelligence-feed">
+            <div class="connector-icons connector-icon-ipsum-threat-intelligence-feed"></div>
+            <div class="connector-title">IPsum Threat Intelligence Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/isit-phishing">
+            <div class="connector-icons connector-icon-isit-phishing"></div>
+            <div class="connector-title">isitPhishing</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/itglue">
+            <div class="connector-icons connector-icon-itglue"></div>
+            <div class="connector-title">IT Glue</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/jask-asoc">
+            <div class="connector-icons connector-icon-jask-asoc"></div>
+            <div class="connector-title">JASK ASOC</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/jc">
+            <div class="connector-icons connector-icon-jc"></div>
+            <div class="connector-title">JC - Parse Command Output</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/jenkins">
+            <div class="connector-icons connector-icon-jenkins"></div>
+            <div class="connector-title">Jenkins</div>
+                            <span class="connector-category-badge">DevOps and Digital Operations</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/jira_new">
+            <div class="connector-icons connector-icon-jira_new"></div>
+            <div class="connector-title">JIRA</div>
+                            <span class="connector-category-badge">Ticket Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/jira-insight-db">
+            <div class="connector-icons connector-icon-jira-insight-db"></div>
+            <div class="connector-title">Jira Insight DB</div>
+                            <span class="connector-category-badge">Ticket Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/joe-sandbox-cloud-connector">
+            <div class="connector-icons connector-icon-joe-sandbox-cloud-connector"></div>
+            <div class="connector-title">Joe Sandbox Cloud</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/jscodesnippet">
+            <div class="connector-icons connector-icon-jscodesnippet"></div>
+            <div class="connector-title">JS Code Snippet</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/jumpcloud">
+            <div class="connector-icons connector-icon-jumpcloud"></div>
+            <div class="connector-title">JumpCloud</div>
+                            <span class="connector-category-badge">Authentication</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/junos">
+            <div class="connector-icons connector-icon-junos"></div>
+            <div class="connector-title">Juniper JunOS</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/juniper-sky-advanced-threat-prevention">
+            <div class="connector-icons connector-icon-juniper-sky-advanced-threat-prevention"></div>
+            <div class="connector-title">Juniper Sky Advanced Threat Prevention</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/kafka">
+            <div class="connector-icons connector-icon-kafka"></div>
+            <div class="connector-title">Kafka</div>
+                            <span class="connector-category-badge">Compute Platform</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/kaseya">
+            <div class="connector-icons connector-icon-kaseya"></div>
+            <div class="connector-title">Kaseya</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/kapserskysecuritycenter">
+            <div class="connector-icons connector-icon-kapserskysecuritycenter"></div>
+            <div class="connector-title">Kaspersky Security Center</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/kasperskythreatintel">
+            <div class="connector-icons connector-icon-kasperskythreatintel"></div>
+            <div class="connector-title">Kaspersky Threat Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/kenna">
+            <div class="connector-icons connector-icon-kenna"></div>
+            <div class="connector-title">Kenna</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/kiuwan">
+            <div class="connector-icons connector-icon-kiuwan"></div>
+            <div class="connector-title">Kiuwan</div>
+                            <span class="connector-category-badge">DevOps and Digital Operations</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/know_thy_customer">
+            <div class="connector-icons connector-icon-know_thy_customer"></div>
+            <div class="connector-title">Know Thy Customer</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/knowb4-phisher">
+            <div class="connector-icons connector-icon-knowb4-phisher"></div>
+            <div class="connector-title">KnowBe4 PhishER</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/koodous">
+            <div class="connector-icons connector-icon-koodous"></div>
+            <div class="connector-title">Koodous</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/kubernetes">
+            <div class="connector-icons connector-icon-kubernetes"></div>
+            <div class="connector-title">Kubernetes</div>
+                            <span class="connector-category-badge">Container Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/lacework-forticnapp">
+            <div class="connector-icons connector-icon-lacework-forticnapp"></div>
+            <div class="connector-title">Lacework FortiCNAPP</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/lastline">
+            <div class="connector-icons connector-icon-lastline"></div>
+            <div class="connector-title">Lastline</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/logicmonitor">
+            <div class="connector-icons connector-icon-logicmonitor"></div>
+            <div class="connector-title">LogicMonitor</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/logpoint">
+            <div class="connector-icons connector-icon-logpoint"></div>
+            <div class="connector-title">LogPoint</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/logrhythm">
+            <div class="connector-icons connector-icon-logrhythm"></div>
+            <div class="connector-title">LogRhythm</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/logz-io">
+            <div class="connector-icons connector-icon-logz-io"></div>
+            <div class="connector-title">Logz.io</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/lumu">
+            <div class="connector-icons connector-icon-lumu"></div>
+            <div class="connector-title">Lumu</div>
+                            <span class="connector-category-badge">Threat Detection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/macvendors">
+            <div class="connector-icons connector-icon-macvendors"></div>
+            <div class="connector-title">MACVendors</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mailboxlayer">
+            <div class="connector-icons connector-icon-mailboxlayer"></div>
+            <div class="connector-title">MailBoxLayer</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/malshare">
+            <div class="connector-icons connector-icon-malshare"></div>
+            <div class="connector-title">Malshare</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/malsilo">
+            <div class="connector-icons connector-icon-malsilo"></div>
+            <div class="connector-title">MalSilo</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/maltiverse">
+            <div class="connector-icons connector-icon-maltiverse"></div>
+            <div class="connector-title">Maltiverse</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/malwarebazaar-connector">
+            <div class="connector-icons connector-icon-malwarebazaar-connector"></div>
+            <div class="connector-title">MalwareBazaar</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/malwarebazaar">
+            <div class="connector-icons connector-icon-malwarebazaar"></div>
+            <div class="connector-title">MalwareBazaar Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/malwarebytes">
+            <div class="connector-icons connector-icon-malwarebytes"></div>
+            <div class="connector-title">Malwarebytes</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/malware_domain_list">
+            <div class="connector-icons connector-icon-malware_domain_list"></div>
+            <div class="connector-title">Malwaredomainlist</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/malwr">
+            <div class="connector-icons connector-icon-malwr"></div>
+            <div class="connector-title">Malwr</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/manageengine-admanager-plus">
+            <div class="connector-icons connector-icon-manageengine-admanager-plus"></div>
+            <div class="connector-title">ManageEngine ADManager Plus</div>
+                            <span class="connector-category-badge">Identity Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/manageenginekeymanagerplus">
+            <div class="connector-icons connector-icon-manageenginekeymanagerplus"></div>
+            <div class="connector-title">ManageEngine Key Manager Plus</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/manageengine-log360">
+            <div class="connector-icons connector-icon-manageengine-log360"></div>
+            <div class="connector-title">ManageEngine Log360</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/manageengine_servicedesk_plus">
+            <div class="connector-icons connector-icon-manageengine_servicedesk_plus"></div>
+            <div class="connector-title">ManageEngine ServiceDesk Plus</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/manageengine-servicedesk-plus-msp">
+            <div class="connector-icons connector-icon-manageengine-servicedesk-plus-msp"></div>
+            <div class="connector-title">ManageEngine ServiceDesk Plus MSP</div>
+                            <span class="connector-category-badge">Ticket Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mandiant-advantage-threat-intelligence">
+            <div class="connector-icons connector-icon-mandiant-advantage-threat-intelligence"></div>
+            <div class="connector-title">Mandiant Advantage Threat Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mandiantfeed">
+            <div class="connector-icons connector-icon-mandiantfeed"></div>
+            <div class="connector-title">Mandiant Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mandiant-threat-intelligence">
+            <div class="connector-icons connector-icon-mandiant-threat-intelligence"></div>
+            <div class="connector-title">Mandiant Threat Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/maxmind">
+            <div class="connector-icons connector-icon-maxmind"></div>
+            <div class="connector-title">MaxMind</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/maxmind-geoip2">
+            <div class="connector-icons connector-icon-maxmind-geoip2"></div>
+            <div class="connector-title">MaxMind GeoIP2</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mcafee-epo">
+            <div class="connector-icons connector-icon-mcafee-epo"></div>
+            <div class="connector-title">McAfee ePO</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mcafee_esm">
+            <div class="connector-icons connector-icon-mcafee_esm"></div>
+            <div class="connector-title">McAfee ESM</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mcafeemvisioninsights">
+            <div class="connector-icons connector-icon-mcafeemvisioninsights"></div>
+            <div class="connector-title">McAfee Mvision Insights</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mcafee-nsm">
+            <div class="connector-icons connector-icon-mcafee-nsm"></div>
+            <div class="connector-title">McAfee Network Security Manager</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mcafee_opendxl">
+            <div class="connector-icons connector-icon-mcafee_opendxl"></div>
+            <div class="connector-title">McAfee OpenDXL</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mcafee_tie">
+            <div class="connector-icons connector-icon-mcafee_tie"></div>
+            <div class="connector-title">McAfee TIE</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mcafee_web_gateway">
+            <div class="connector-icons connector-icon-mcafee_web_gateway"></div>
+            <div class="connector-title">McAfee Web Gateway</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/messagebird">
+            <div class="connector-icons connector-icon-messagebird"></div>
+            <div class="connector-title">MessageBird</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/metadefender_cloud">
+            <div class="connector-icons connector-icon-metadefender_cloud"></div>
+            <div class="connector-title">Metadefender</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microfocus-arcsight">
+            <div class="connector-icons connector-icon-microfocus-arcsight"></div>
+            <div class="connector-title">Micro Focus ArcSight ESM</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/micro_focus_arcsight">
+            <div class="connector-icons connector-icon-micro_focus_arcsight"></div>
+            <div class="connector-title">Micro Focus ArcSight Logger</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/interset">
+            <div class="connector-icons connector-icon-interset"></div>
+            <div class="connector-title">Micro Focus Interset</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/hp_service_manager">
+            <div class="connector-icons connector-icon-hp_service_manager"></div>
+            <div class="connector-title">Micro Focus Service Manager</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/micro-focus-smax">
+            <div class="connector-icons connector-icon-micro-focus-smax"></div>
+            <div class="connector-title">Micro Focus SMAX</div>
+                            <span class="connector-category-badge">Ticket Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-365-defender">
+            <div class="connector-icons connector-icon-microsoft-365-defender"></div>
+            <div class="connector-title">Microsoft 365 Defender</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-advanced-threat-analytics">
+            <div class="connector-icons connector-icon-microsoft-advanced-threat-analytics"></div>
+            <div class="connector-title">Microsoft Advanced Threat Analytics</div>
+                            <span class="connector-category-badge">Threat Detection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-bing">
+            <div class="connector-icons connector-icon-microsoft-bing"></div>
+            <div class="connector-title">Microsoft Bing</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-casb">
+            <div class="connector-icons connector-icon-microsoft-casb"></div>
+            <div class="connector-title">Microsoft CASB</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/msdefendercloud">
+            <div class="connector-icons connector-icon-msdefendercloud"></div>
+            <div class="connector-title">Microsoft Defender For Cloud</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-defender-for-cloud-apps">
+            <div class="connector-icons connector-icon-microsoft-defender-for-cloud-apps"></div>
+            <div class="connector-title">Microsoft Defender for Cloud Apps</div>
+                            <span class="connector-category-badge">Cloud access security broker (CASB)</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/msdefenderforendpoints">
+            <div class="connector-icons connector-icon-msdefenderforendpoints"></div>
+            <div class="connector-title">Microsoft Defender For Endpoints</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-defender-for-iot">
+            <div class="connector-icons connector-icon-microsoft-defender-for-iot"></div>
+            <div class="connector-title">Microsoft Defender For IoT</div>
+                            <span class="connector-category-badge">OT &amp; IoT Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ms-defender-threat-intel">
+            <div class="connector-icons connector-icon-ms-defender-threat-intel"></div>
+            <div class="connector-title">Microsoft Defender Threat Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-defender-vulnerability-management">
+            <div class="connector-icons connector-icon-microsoft-defender-vulnerability-management"></div>
+            <div class="connector-title">Microsoft Defender Vulnerability Management</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-defender-office-365">
+            <div class="connector-icons connector-icon-microsoft-defender-office-365"></div>
+            <div class="connector-title">Microsoft Defender-Office 365</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-entra-id">
+            <div class="connector-icons connector-icon-microsoft-entra-id"></div>
+            <div class="connector-title">Microsoft Entra ID</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/msgraphapi">
+            <div class="connector-icons connector-icon-msgraphapi"></div>
+            <div class="connector-title">Microsoft Graph API</div>
+                            <span class="connector-category-badge">Query Service</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ms-graph-mail">
+            <div class="connector-icons connector-icon-ms-graph-mail"></div>
+            <div class="connector-title">Microsoft Graph Mail</div>
+                            <span class="connector-category-badge">Email Server</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ms-intune">
+            <div class="connector-icons connector-icon-ms-intune"></div>
+            <div class="connector-title">Microsoft Intune</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ms-mngt-activity-api">
+            <div class="connector-icons connector-icon-ms-mngt-activity-api"></div>
+            <div class="connector-title">Microsoft Management Activity API</div>
+                            <span class="connector-category-badge">Data Enrichment &amp; Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/office365feed">
+            <div class="connector-icons connector-icon-office365feed"></div>
+            <div class="connector-title">Microsoft Office 365 Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-onedrive">
+            <div class="connector-icons connector-icon-microsoft-onedrive"></div>
+            <div class="connector-title">Microsoft OneDrive</div>
+                            <span class="connector-category-badge">Asset Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoftscom">
+            <div class="connector-icons connector-icon-microsoftscom"></div>
+            <div class="connector-title">Microsoft SCOM</div>
+                            <span class="connector-category-badge">Endpoint Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-sentinel">
+            <div class="connector-icons connector-icon-microsoft-sentinel"></div>
+            <div class="connector-title">Microsoft Sentinel</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sharepoint">
+            <div class="connector-icons connector-icon-sharepoint"></div>
+            <div class="connector-title">Microsoft Sharepoint</div>
+                            <span class="connector-category-badge">Content Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-sql-server">
+            <div class="connector-icons connector-icon-microsoft-sql-server"></div>
+            <div class="connector-title">Microsoft SQL Server</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ms-teams">
+            <div class="connector-icons connector-icon-ms-teams"></div>
+            <div class="connector-title">Microsoft Teams</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/winrm-1">
+            <div class="connector-icons connector-icon-winrm-1"></div>
+            <div class="connector-title">Microsoft WinRM</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/microsoft-wmi">
+            <div class="connector-icons connector-icon-microsoft-wmi"></div>
+            <div class="connector-title">Microsoft WMI</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/middesk">
+            <div class="connector-icons connector-icon-middesk"></div>
+            <div class="connector-title">Middesk</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mimecast">
+            <div class="connector-icons connector-icon-mimecast"></div>
+            <div class="connector-title">Mimecast</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mimecasts2">
+            <div class="connector-icons connector-icon-mimecasts2"></div>
+            <div class="connector-title">Mimecast S2</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/misp">
+            <div class="connector-icons connector-icon-misp"></div>
+            <div class="connector-title">MISP</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mitreattack">
+            <div class="connector-icons connector-icon-mitreattack"></div>
+            <div class="connector-title">MITRE ATT&amp;CK</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mnemonic">
+            <div class="connector-icons connector-icon-mnemonic"></div>
+            <div class="connector-title">Mnemonic</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mobile-security-framework">
+            <div class="connector-icons connector-icon-mobile-security-framework"></div>
+            <div class="connector-title">Mobile Security Framework</div>
+                            <span class="connector-category-badge">Threat Hunting and Search</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mongodb">
+            <div class="connector-icons connector-icon-mongodb"></div>
+            <div class="connector-title">MongoDB</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mxtoolbox">
+            <div class="connector-icons connector-icon-mxtoolbox"></div>
+            <div class="connector-title">Mxtoolbox</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/myip_ms">
+            <div class="connector-icons connector-icon-myip_ms"></div>
+            <div class="connector-title">Myipms</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/mysql">
+            <div class="connector-icons connector-icon-mysql"></div>
+            <div class="connector-title">MySQL</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/nessus-on-prem">
+            <div class="connector-icons connector-icon-nessus-on-prem"></div>
+            <div class="connector-title">Nessus</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/netapp-ontap">
+            <div class="connector-icons connector-icon-netapp-ontap"></div>
+            <div class="connector-title">NetApp ONTAP</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/netbios">
+            <div class="connector-icons connector-icon-netbios"></div>
+            <div class="connector-title">NetBIOS</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/netbox">
+            <div class="connector-icons connector-icon-netbox"></div>
+            <div class="connector-title">NetBox</div>
+                            <span class="connector-category-badge">Asset Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/netscaler">
+            <div class="connector-icons connector-icon-netscaler"></div>
+            <div class="connector-title">NetScaler ADC</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/netscout-arbor-aed">
+            <div class="connector-icons connector-icon-netscout-arbor-aed"></div>
+            <div class="connector-title">Netscout Arbor Edge Defense (AED)</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/netskope">
+            <div class="connector-icons connector-icon-netskope"></div>
+            <div class="connector-title">Netskope</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/netwitness">
+            <div class="connector-icons connector-icon-netwitness"></div>
+            <div class="connector-title">Netwitness</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/neutrinoapi">
+            <div class="connector-icons connector-icon-neutrinoapi"></div>
+            <div class="connector-title">Neutrinoapi</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/nexthink">
+            <div class="connector-icons connector-icon-nexthink"></div>
+            <div class="connector-title">Nexthink</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/nist-nvd">
+            <div class="connector-icons connector-icon-nist-nvd"></div>
+            <div class="connector-title">NIST National Vulnerability Database</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/nmap">
+            <div class="connector-icons connector-icon-nmap"></div>
+            <div class="connector-title">NMAP Scanner</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/nozomicmc">
+            <div class="connector-icons connector-icon-nozomicmc"></div>
+            <div class="connector-title">Nozomi Networks Central Management Console</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/nozomi-networks-guardian">
+            <div class="connector-icons connector-icon-nozomi-networks-guardian"></div>
+            <div class="connector-title">Nozomi Networks Guardian</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/nsfocus-threat-intelligence">
+            <div class="connector-icons connector-icon-nsfocus-threat-intelligence"></div>
+            <div class="connector-title">NSFOCUS Threat Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/nsfocus-feed">
+            <div class="connector-icons connector-icon-nsfocus-feed"></div>
+            <div class="connector-title">NSFOCUS Threat Intelligence Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ocrspace">
+            <div class="connector-icons connector-icon-ocrspace"></div>
+            <div class="connector-title">OCRSpace</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/odbc">
+            <div class="connector-icons connector-icon-odbc"></div>
+            <div class="connector-title">ODBC</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/okta-new">
+            <div class="connector-icons connector-icon-okta-new"></div>
+            <div class="connector-title">OKTA</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/oletools">
+            <div class="connector-icons connector-icon-oletools"></div>
+            <div class="connector-title">OLETools</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/openai">
+            <div class="connector-icons connector-icon-openai"></div>
+            <div class="connector-title">OpenAI</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/openbao">
+            <div class="connector-icons connector-icon-openbao"></div>
+            <div class="connector-title">OpenBao Vault</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/opencti">
+            <div class="connector-icons connector-icon-opencti"></div>
+            <div class="connector-title">OpenCTI</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/openphish">
+            <div class="connector-icons connector-icon-openphish"></div>
+            <div class="connector-title">OpenPhish</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/opsgenie">
+            <div class="connector-icons connector-icon-opsgenie"></div>
+            <div class="connector-title">OpsGenie</div>
+                            <span class="connector-category-badge">DevOps and Digital Operations</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/opswat-metadefender-core">
+            <div class="connector-icons connector-icon-opswat-metadefender-core"></div>
+            <div class="connector-title">OPSWAT MetaDefender Core</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/oracle-access-manager">
+            <div class="connector-icons connector-icon-oracle-access-manager"></div>
+            <div class="connector-title">Oracle Access Manager</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/oracledb">
+            <div class="connector-icons connector-icon-oracledb"></div>
+            <div class="connector-title">Oracle Database</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/orca">
+            <div class="connector-icons connector-icon-orca"></div>
+            <div class="connector-title">Orca</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/otbase-inventory">
+            <div class="connector-icons connector-icon-otbase-inventory"></div>
+            <div class="connector-title">OTbase Inventory</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/otrs">
+            <div class="connector-icons connector-icon-otrs"></div>
+            <div class="connector-title">OTRS</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/pagerduty">
+            <div class="connector-icons connector-icon-pagerduty"></div>
+            <div class="connector-title">PagerDuty</div>
+                            <span class="connector-category-badge">DevOps and Digital Operations</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/paloalto-cortex-xdr">
+            <div class="connector-icons connector-icon-paloalto-cortex-xdr"></div>
+            <div class="connector-title">Palo Alto Cortex XDR</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/palo-alto-enterprise-dlp">
+            <div class="connector-icons connector-icon-palo-alto-enterprise-dlp"></div>
+            <div class="connector-title">Palo Alto Enterprise DLP</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/palialto_firewall-2">
+            <div class="connector-icons connector-icon-palialto_firewall-2"></div>
+            <div class="connector-title">Palo Alto Firewall</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/paloalto-panorama">
+            <div class="connector-icons connector-icon-paloalto-panorama"></div>
+            <div class="connector-title">Palo Alto Networks Panorama</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/palo-alto-prisma-cloud">
+            <div class="connector-icons connector-icon-palo-alto-prisma-cloud"></div>
+            <div class="connector-title">Palo Alto Prisma Cloud</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/paloalto-autofocus">
+            <div class="connector-icons connector-icon-paloalto-autofocus"></div>
+            <div class="connector-title">PaloAlto AutoFocus</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/paloalto-wildfire">
+            <div class="connector-icons connector-icon-paloalto-wildfire"></div>
+            <div class="connector-title">PaloAlto Wildfire</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/passivetotal">
+            <div class="connector-icons connector-icon-passivetotal"></div>
+            <div class="connector-title">PassiveTotal</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/pcap-tools">
+            <div class="connector-icons connector-icon-pcap-tools"></div>
+            <div class="connector-title">PCAP Tools</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/cyops-pdf-reader">
+            <div class="connector-icons connector-icon-cyops-pdf-reader"></div>
+            <div class="connector-title">PDF Reader</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/pensando-policy-service-manager">
+            <div class="connector-icons connector-icon-pensando-policy-service-manager"></div>
+            <div class="connector-title">Pensando Policy Service Manager</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/pf-sense">
+            <div class="connector-icons connector-icon-pf-sense"></div>
+            <div class="connector-title">pfSense</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/phishingclassifier-new">
+            <div class="connector-icons connector-icon-phishingclassifier-new"></div>
+            <div class="connector-title">Phishing Classifier Connector</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/phishing_initiative">
+            <div class="connector-icons connector-icon-phishing_initiative"></div>
+            <div class="connector-title">Phishing Initiative</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/phishme">
+            <div class="connector-icons connector-icon-phishme"></div>
+            <div class="connector-title">Phishme Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/phishtank">
+            <div class="connector-icons connector-icon-phishtank"></div>
+            <div class="connector-title">PhishTank</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/pipl">
+            <div class="connector-icons connector-icon-pipl"></div>
+            <div class="connector-title">Pipl</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/plain-text-feed">
+            <div class="connector-icons connector-icon-plain-text-feed"></div>
+            <div class="connector-title">Plain Text Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/polar-security">
+            <div class="connector-icons connector-icon-polar-security"></div>
+            <div class="connector-title">Polar Security</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/polyswarm">
+            <div class="connector-icons connector-icon-polyswarm"></div>
+            <div class="connector-title">PolySwarm</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/postgresql">
+            <div class="connector-icons connector-icon-postgresql"></div>
+            <div class="connector-title">Postgresql</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/progress-whatsup-gold">
+            <div class="connector-icons connector-icon-progress-whatsup-gold"></div>
+            <div class="connector-title">Progress WhatsUp Gold</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/proofpoint-email-gateway">
+            <div class="connector-icons connector-icon-proofpoint-email-gateway"></div>
+            <div class="connector-title">Proofpoint Email Gateway</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/proofpoint">
+            <div class="connector-icons connector-icon-proofpoint"></div>
+            <div class="connector-title">Proofpoint TAP</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/proofpoint-threat-response">
+            <div class="connector-icons connector-icon-proofpoint-threat-response"></div>
+            <div class="connector-title">Proofpoint Threat Response</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/proofpoint-trap">
+            <div class="connector-icons connector-icon-proofpoint-trap"></div>
+            <div class="connector-title">Proofpoint TRAP</div>
+                            <span class="connector-category-badge">Case Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/protectwise">
+            <div class="connector-icons connector-icon-protectwise"></div>
+            <div class="connector-title">ProtectWise</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/prtg">
+            <div class="connector-icons connector-icon-prtg"></div>
+            <div class="connector-title">PRTG</div>
+                            <span class="connector-category-badge">Monitoring</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/pulsedive">
+            <div class="connector-icons connector-icon-pulsedive"></div>
+            <div class="connector-title">Pulsedive</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/pure-storage">
+            <div class="connector-icons connector-icon-pure-storage"></div>
+            <div class="connector-title">Pure Storage FlashArray</div>
+                            <span class="connector-category-badge">Storage</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/qianxin-threat-intelligence">
+            <div class="connector-icons connector-icon-qianxin-threat-intelligence"></div>
+            <div class="connector-title">QiAnxin Threat Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/qrcode-tools">
+            <div class="connector-icons connector-icon-qrcode-tools"></div>
+            <div class="connector-title">QR Code Tools</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/qualys">
+            <div class="connector-icons connector-icon-qualys"></div>
+            <div class="connector-title">Qualys</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/qualys-file-integrity-monitoring">
+            <div class="connector-icons connector-icon-qualys-file-integrity-monitoring"></div>
+            <div class="connector-title">Qualys File Integrity Monitoring(FIM)</div>
+                            <span class="connector-category-badge">Monitoring</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/qualys-was">
+            <div class="connector-icons connector-icon-qualys-was"></div>
+            <div class="connector-title">Qualys Web Application Scanning (WAS)</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/quttera">
+            <div class="connector-icons connector-icon-quttera"></div>
+            <div class="connector-title">Quttera</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/radware-alteon">
+            <div class="connector-icons connector-icon-radware-alteon"></div>
+            <div class="connector-title">Radware Alteon</div>
+                            <span class="connector-category-badge">Automation controller</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/rapid7insightcloudsec">
+            <div class="connector-icons connector-icon-rapid7insightcloudsec"></div>
+            <div class="connector-title">Rapid7 InsightCloudSec</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/rapid7_insightidr">
+            <div class="connector-icons connector-icon-rapid7_insightidr"></div>
+            <div class="connector-title">Rapid7 InsightIDR</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/rapid7-insightvm">
+            <div class="connector-icons connector-icon-rapid7-insightvm"></div>
+            <div class="connector-title">Rapid7 InsightVM</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/rapid7_nexpose">
+            <div class="connector-icons connector-icon-rapid7_nexpose"></div>
+            <div class="connector-title">Rapid7 Nexpose</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/rapid7-threat-command-cloud">
+            <div class="connector-icons connector-icon-rapid7-threat-command-cloud"></div>
+            <div class="connector-title">Rapid7 Threat Command Cloud</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/velociraptor">
+            <div class="connector-icons connector-icon-velociraptor"></div>
+            <div class="connector-title">Rapid7 Velociraptor</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/recorded-future">
+            <div class="connector-icons connector-icon-recorded-future"></div>
+            <div class="connector-title">Recorded Future</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/red-canary">
+            <div class="connector-icons connector-icon-red-canary"></div>
+            <div class="connector-title">Red Canary</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/remotefsr">
+            <div class="connector-icons connector-icon-remotefsr"></div>
+            <div class="connector-title">Remote FortiSOAR</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/remote-screenshot">
+            <div class="connector-icons connector-icon-remote-screenshot"></div>
+            <div class="connector-title">Remote Screenshot</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/reporteng-new">
+            <div class="connector-icons connector-icon-reporteng-new"></div>
+            <div class="connector-title">Report Engine Connector</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/request-tracker">
+            <div class="connector-icons connector-icon-request-tracker"></div>
+            <div class="connector-title">Request Tracker</div>
+                            <span class="connector-category-badge">Ticket Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/reversing-labs">
+            <div class="connector-icons connector-icon-reversing-labs"></div>
+            <div class="connector-title">ReversingLabs A1000</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ridgebot">
+            <div class="connector-icons connector-icon-ridgebot"></div>
+            <div class="connector-title">Ridge Security RidgeBot</div>
+                            <span class="connector-category-badge">Breach and Attack Simulation (BAS)</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ripestat">
+            <div class="connector-icons connector-icon-ripestat"></div>
+            <div class="connector-title">Ripestat</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/riskiq-digital-footprint">
+            <div class="connector-icons connector-icon-riskiq-digital-footprint"></div>
+            <div class="connector-title">RiskIQ Digital Footprint</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/riskiq-passivetotal">
+            <div class="connector-icons connector-icon-riskiq-passivetotal"></div>
+            <div class="connector-title">RiskIQ PassiveTotal</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/riskiq-whoisiq">
+            <div class="connector-icons connector-icon-riskiq-whoisiq"></div>
+            <div class="connector-title">RiskIQ WHOISIQ</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/robtex">
+            <div class="connector-icons connector-icon-robtex"></div>
+            <div class="connector-title">Robtex</div>
+                            <span class="connector-category-badge">Threat Detection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/rsa-archer">
+            <div class="connector-icons connector-icon-rsa-archer"></div>
+            <div class="connector-title">RSA Archer</div>
+                            <span class="connector-category-badge">IT Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/rsa-netwitness-log-packets">
+            <div class="connector-icons connector-icon-rsa-netwitness-log-packets"></div>
+            <div class="connector-title">RSA Netwitness Logs and Packets</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/rsa_netwitness">
+            <div class="connector-icons connector-icon-rsa_netwitness"></div>
+            <div class="connector-title">RSA Netwitness SIEM</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/rss-feed">
+            <div class="connector-icons connector-icon-rss-feed"></div>
+            <div class="connector-title">RSS Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/s-mime-messaging">
+            <div class="connector-icons connector-icon-s-mime-messaging"></div>
+            <div class="connector-title">S/MIME Messaging</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/google-safe-browsing">
+            <div class="connector-icons connector-icon-google-safe-browsing"></div>
+            <div class="connector-title">Safe Browsing</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/safebreach">
+            <div class="connector-icons connector-icon-safebreach"></div>
+            <div class="connector-title">SafeBreach v1.0.0</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sailpoint_identityiq">
+            <div class="connector-icons connector-icon-sailpoint_identityiq"></div>
+            <div class="connector-title">SailPoint IdentityIQ</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sailpoint-identitynow">
+            <div class="connector-icons connector-icon-sailpoint-identitynow"></div>
+            <div class="connector-title">SailPoint IdentityNow</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/salesforce">
+            <div class="connector-icons connector-icon-salesforce"></div>
+            <div class="connector-title">Salesforce</div>
+                            <span class="connector-category-badge">Ticket Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/samba">
+            <div class="connector-icons connector-icon-samba"></div>
+            <div class="connector-title">Samba</div>
+                            <span class="connector-category-badge">Compute Platform</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sap-cloud-identity-directory-service">
+            <div class="connector-icons connector-icon-sap-cloud-identity-directory-service"></div>
+            <div class="connector-title">SAP Cloud Identity Directory Service</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sap-enterprise-threat-detection">
+            <div class="connector-icons connector-icon-sap-enterprise-threat-detection"></div>
+            <div class="connector-title">SAP Enterprise Threat Detection</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sap-etd-cloud">
+            <div class="connector-icons connector-icon-sap-etd-cloud"></div>
+            <div class="connector-title">SAP Enterprise Threat Detection Cloud Edition</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sap-netweaver">
+            <div class="connector-icons connector-icon-sap-netweaver"></div>
+            <div class="connector-title">SAP NetWeaver</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/scadafence">
+            <div class="connector-icons connector-icon-scadafence"></div>
+            <div class="connector-title">SCADAfence</div>
+                            <span class="connector-category-badge">OT &amp; IoT Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sccm">
+            <div class="connector-icons connector-icon-sccm"></div>
+            <div class="connector-title">SCCM</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/scp">
+            <div class="connector-icons connector-icon-scp"></div>
+            <div class="connector-title">SCP</div>
+                            <span class="connector-category-badge">Compute Platform</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/screenshot-machine">
+            <div class="connector-icons connector-icon-screenshot-machine"></div>
+            <div class="connector-title">ScreenShotMachine</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/seclyticsnew">
+            <div class="connector-icons connector-icon-seclyticsnew"></div>
+            <div class="connector-title">Seclytics Augur pXDR</div>
+                            <span class="connector-category-badge">Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/secondwrite">
+            <div class="connector-icons connector-icon-secondwrite"></div>
+            <div class="connector-title">SecondWrite</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/security-scorecard">
+            <div class="connector-icons connector-icon-security-scorecard"></div>
+            <div class="connector-title">Security Scorecard</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/securitybridge">
+            <div class="connector-icons connector-icon-securitybridge"></div>
+            <div class="connector-title">SecurityBridge</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/security-trails">
+            <div class="connector-icons connector-icon-security-trails"></div>
+            <div class="connector-title">SecurityTrails</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/securonix">
+            <div class="connector-icons connector-icon-securonix"></div>
+            <div class="connector-title">Securonix SNYPR</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sekoiaioxdr">
+            <div class="connector-icons connector-icon-sekoiaioxdr"></div>
+            <div class="connector-title">SEKOIA.IO XDR</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sendgrid">
+            <div class="connector-icons connector-icon-sendgrid"></div>
+            <div class="connector-title">SendGrid</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sentinel-one">
+            <div class="connector-icons connector-icon-sentinel-one"></div>
+            <div class="connector-title">SentinelOne</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/serviceaide">
+            <div class="connector-icons connector-icon-serviceaide"></div>
+            <div class="connector-title">ServiceAide</div>
+                            <span class="connector-category-badge">Ticket Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/servicenow-v2-0-1">
+            <div class="connector-icons connector-icon-servicenow-v2-0-1"></div>
+            <div class="connector-title">ServiceNow</div>
+                            <span class="connector-category-badge">Security Posture Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/servicenowcmdb">
+            <div class="connector-icons connector-icon-servicenowcmdb"></div>
+            <div class="connector-title">ServiceNow CMDB</div>
+                            <span class="connector-category-badge">IT Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/shadow-server">
+            <div class="connector-icons connector-icon-shadow-server"></div>
+            <div class="connector-title">Shadow Server</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/shieldx">
+            <div class="connector-icons connector-icon-shieldx"></div>
+            <div class="connector-title">ShieldX</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/shodan-1">
+            <div class="connector-icons connector-icon-shodan-1"></div>
+            <div class="connector-title">Shodan</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/silverfort">
+            <div class="connector-icons connector-icon-silverfort"></div>
+            <div class="connector-title">Silverfort</div>
+                            <span class="connector-category-badge">Identity and Access Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/skyboxsecurity">
+            <div class="connector-icons connector-icon-skyboxsecurity"></div>
+            <div class="connector-title">Skybox Security</div>
+                            <span class="connector-category-badge">Security Posture Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/slacalc">
+            <div class="connector-icons connector-icon-slacalc"></div>
+            <div class="connector-title">SLA Calculator</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/slack2">
+            <div class="connector-icons connector-icon-slack2"></div>
+            <div class="connector-title">Slack</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/smtp-new">
+            <div class="connector-icons connector-icon-smtp-new"></div>
+            <div class="connector-title">SMTP Connector</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/snort-ip-blocklist-feed">
+            <div class="connector-icons connector-icon-snort-ip-blocklist-feed"></div>
+            <div class="connector-title">Snort IP Blocklist Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/soap-new">
+            <div class="connector-icons connector-icon-soap-new"></div>
+            <div class="connector-title">SOAP Connector</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/socradar">
+            <div class="connector-icons connector-icon-socradar"></div>
+            <div class="connector-title">SOCRadar</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/solarwinds">
+            <div class="connector-icons connector-icon-solarwinds"></div>
+            <div class="connector-title">SolarWinds</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/solarwinds-pingdom">
+            <div class="connector-icons connector-icon-solarwinds-pingdom"></div>
+            <div class="connector-title">Solarwinds Pingdom</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/soltra_edge">
+            <div class="connector-icons connector-icon-soltra_edge"></div>
+            <div class="connector-title">Soltra Edge</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sonicwall-firewall">
+            <div class="connector-icons connector-icon-sonicwall-firewall"></div>
+            <div class="connector-title">SonicWall Firewall</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sonicwall-nsm">
+            <div class="connector-icons connector-icon-sonicwall-nsm"></div>
+            <div class="connector-title">SonicWall NSM</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sophos_central">
+            <div class="connector-icons connector-icon-sophos_central"></div>
+            <div class="connector-title">Sophos Central</div>
+                            <span class="connector-category-badge">Security Posture Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sophos_utm">
+            <div class="connector-icons connector-icon-sophos_utm"></div>
+            <div class="connector-title">Sophos UTM-9</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sophos_xg">
+            <div class="connector-icons connector-icon-sophos_xg"></div>
+            <div class="connector-title">Sophos XG Firewall</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/spamhaus">
+            <div class="connector-icons connector-icon-spamhaus"></div>
+            <div class="connector-title">Spamhaus</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/spamhausfeed">
+            <div class="connector-icons connector-icon-spamhausfeed"></div>
+            <div class="connector-title">Spamhaus Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/splunk_new">
+            <div class="connector-icons connector-icon-splunk_new"></div>
+            <div class="connector-title">Splunk</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/splunkaddonnew">
+            <div class="connector-icons connector-icon-splunkaddonnew"></div>
+            <div class="connector-title">Splunk Add-on</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sqlite">
+            <div class="connector-icons connector-icon-sqlite"></div>
+            <div class="connector-title">SQLite</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ssh-new">
+            <div class="connector-icons connector-icon-ssh-new"></div>
+            <div class="connector-title">SSH Connector</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ssl-blacklist-feed">
+            <div class="connector-icons connector-icon-ssl-blacklist-feed"></div>
+            <div class="connector-title">SSL Blacklist Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/stellarcyber">
+            <div class="connector-icons connector-icon-stellarcyber"></div>
+            <div class="connector-title">Stellar Cyber</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/stix2">
+            <div class="connector-icons connector-icon-stix2"></div>
+            <div class="connector-title">STIX</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sumologicnew">
+            <div class="connector-icons connector-icon-sumologicnew"></div>
+            <div class="connector-title">Sumo Logic</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec-atp">
+            <div class="connector-icons connector-icon-symantec-atp"></div>
+            <div class="connector-title">Symantec ATP</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec-content-analysis">
+            <div class="connector-icons connector-icon-symantec-content-analysis"></div>
+            <div class="connector-title">Symantec CAS</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec_ccsvm">
+            <div class="connector-icons connector-icon-symantec_ccsvm"></div>
+            <div class="connector-title">Symantec CCSVM</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec_cloudsoc">
+            <div class="connector-icons connector-icon-symantec_cloudsoc"></div>
+            <div class="connector-title">Symantec CloudSOC</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec_deepsight_intelligence">
+            <div class="connector-icons connector-icon-symantec_deepsight_intelligence"></div>
+            <div class="connector-title">Symantec Deepsight Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec_data-loss-prevention">
+            <div class="connector-icons connector-icon-symantec_data-loss-prevention"></div>
+            <div class="connector-title">Symantec DLP</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec_edr">
+            <div class="connector-icons connector-icon-symantec_edr"></div>
+            <div class="connector-title">Symantec EDR</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec-edr-cloud">
+            <div class="connector-icons connector-icon-symantec-edr-cloud"></div>
+            <div class="connector-title">Symantec EDR Cloud</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec-email-cloud">
+            <div class="connector-icons connector-icon-symantec-email-cloud"></div>
+            <div class="connector-title">Symantec Email Security.cloud</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec_sepm">
+            <div class="connector-icons connector-icon-symantec_sepm"></div>
+            <div class="connector-title">Symantec EPM (SEPM)</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec_ica">
+            <div class="connector-icons connector-icon-symantec_ica"></div>
+            <div class="connector-title">Symantec ICA</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec-icdx">
+            <div class="connector-icons connector-icon-symantec-icdx"></div>
+            <div class="connector-title">Symantec ICDX</div>
+                            <span class="connector-category-badge">Security Posture Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec-management-center">
+            <div class="connector-icons connector-icon-symantec-management-center"></div>
+            <div class="connector-title">Symantec Management Center</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec-messaging-gateway">
+            <div class="connector-icons connector-icon-symantec-messaging-gateway"></div>
+            <div class="connector-title">Symantec Messaging Gateway</div>
+                            <span class="connector-category-badge">Email Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec_mss">
+            <div class="connector-icons connector-icon-symantec_mss"></div>
+            <div class="connector-title">Symantec MSS</div>
+                            <span class="connector-category-badge">Security Posture Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec_security_analytics">
+            <div class="connector-icons connector-icon-symantec_security_analytics"></div>
+            <div class="connector-title">Symantec Security Analytics</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/symantec_webpulse_site_review">
+            <div class="connector-icons connector-icon-symantec_webpulse_site_review"></div>
+            <div class="connector-title">Symantec WebPulse Site Review</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/syslog1">
+            <div class="connector-icons connector-icon-syslog1"></div>
+            <div class="connector-title">Syslog</div>
+                            <span class="connector-category-badge">Logging</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/sysmon-new">
+            <div class="connector-icons connector-icon-sysmon-new"></div>
+            <div class="connector-title">System Monitoring Connector</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/taegis-xdr">
+            <div class="connector-icons connector-icon-taegis-xdr"></div>
+            <div class="connector-title">Taegis XDR</div>
+                            <span class="connector-category-badge">Threat Detection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/tanium">
+            <div class="connector-icons connector-icon-tanium"></div>
+            <div class="connector-title">Tanium</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/tanium-threat-response">
+            <div class="connector-icons connector-icon-tanium-threat-response"></div>
+            <div class="connector-title">Tanium Threat Response</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/taxii-threat-intel-feed">
+            <div class="connector-icons connector-icon-taxii-threat-intel-feed"></div>
+            <div class="connector-title">TAXII Threat Intel Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/taxii2-threat-intel-feed">
+            <div class="connector-icons connector-icon-taxii2-threat-intel-feed"></div>
+            <div class="connector-title">TAXII2 Threat Intel Feed</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/tcell">
+            <div class="connector-icons connector-icon-tcell"></div>
+            <div class="connector-title">Tcell</div>
+                            <span class="connector-category-badge">Web Application</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/tcp-wave">
+            <div class="connector-icons connector-icon-tcp-wave"></div>
+            <div class="connector-title">TCP Wave</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/tehtris-edr">
+            <div class="connector-icons connector-icon-tehtris-edr"></div>
+            <div class="connector-title">TEHTRIS EDR</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/tenable">
+            <div class="connector-icons connector-icon-tenable"></div>
+            <div class="connector-title">Tenable Security Center</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/tenable_io">
+            <div class="connector-icons connector-icon-tenable_io"></div>
+            <div class="connector-title">TenableIO</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/teradata-db">
+            <div class="connector-icons connector-icon-teradata-db"></div>
+            <div class="connector-title">Teradata DB</div>
+                            <span class="connector-category-badge">Database</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/text-utility">
+            <div class="connector-icons connector-icon-text-utility"></div>
+            <div class="connector-title">Text Utility</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/thehive">
+            <div class="connector-icons connector-icon-thehive"></div>
+            <div class="connector-title">TheHive</div>
+                            <span class="connector-category-badge">Case Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/threadfix">
+            <div class="connector-icons connector-icon-threadfix"></div>
+            <div class="connector-title">ThreadFix</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/threat-intelligence-platform">
+            <div class="connector-icons connector-icon-threat-intelligence-platform"></div>
+            <div class="connector-title">Threat Intelligence Platform</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/threatbook">
+            <div class="connector-icons connector-icon-threatbook"></div>
+            <div class="connector-title">ThreatBook</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/threatconnect">
+            <div class="connector-icons connector-icon-threatconnect"></div>
+            <div class="connector-title">ThreatConnect</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/threatcrowd">
+            <div class="connector-icons connector-icon-threatcrowd"></div>
+            <div class="connector-title">Threatcrowd</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/threatminer">
+            <div class="connector-icons connector-icon-threatminer"></div>
+            <div class="connector-title">ThreatMiner</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/threatquotient">
+            <div class="connector-icons connector-icon-threatquotient"></div>
+            <div class="connector-title">ThreatQ</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/threatstop">
+            <div class="connector-icons connector-icon-threatstop"></div>
+            <div class="connector-title">ThreatSTOP</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/threatx">
+            <div class="connector-icons connector-icon-threatx"></div>
+            <div class="connector-title">ThreatX</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/thycotic_secret_server">
+            <div class="connector-icons connector-icon-thycotic_secret_server"></div>
+            <div class="connector-title">Thycotic Secret Server</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/time-series-chart-utilities">
+            <div class="connector-icons connector-icon-time-series-chart-utilities"></div>
+            <div class="connector-title">Time Series Chart Utilities</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/tor">
+            <div class="connector-icons connector-icon-tor"></div>
+            <div class="connector-title">Tor</div>
+                            <span class="connector-category-badge">Compute Platform</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/tor-exit-address-feed">
+            <div class="connector-icons connector-icon-tor-exit-address-feed"></div>
+            <div class="connector-title">Tor Exit Address Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/trellix-endpoint-security">
+            <div class="connector-icons connector-icon-trellix-endpoint-security"></div>
+            <div class="connector-title">Trellix Endpoint Security (HX)</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/trello">
+            <div class="connector-icons connector-icon-trello"></div>
+            <div class="connector-title">Trello</div>
+                            <span class="connector-category-badge">Task Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/trend-micro-apex-central">
+            <div class="connector-icons connector-icon-trend-micro-apex-central"></div>
+            <div class="connector-title">Trend Micro Apex Central</div>
+                            <span class="connector-category-badge">Security Posture Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/trend-micro-cloud-app-sec">
+            <div class="connector-icons connector-icon-trend-micro-cloud-app-sec"></div>
+            <div class="connector-title">Trend Micro Cloud App Security</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/trendmicrocontrolmanager">
+            <div class="connector-icons connector-icon-trendmicrocontrolmanager"></div>
+            <div class="connector-title">Trend Micro Control Manager</div>
+                            <span class="connector-category-badge">Security Posture Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/trendmicro_ddan">
+            <div class="connector-icons connector-icon-trendmicro_ddan"></div>
+            <div class="connector-title">Trend Micro DDAN</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/trend-micro-deep-security">
+            <div class="connector-icons connector-icon-trend-micro-deep-security"></div>
+            <div class="connector-title">Trend Micro Deep Security</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/trend_micro_endpoint_sensor">
+            <div class="connector-icons connector-icon-trend_micro_endpoint_sensor"></div>
+            <div class="connector-title">Trend Micro Endpoint Sensor</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/TrendMicro_SMS">
+            <div class="connector-icons connector-icon-TrendMicro_SMS"></div>
+            <div class="connector-title">Trend Micro SMS</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/trendmicrovisionone">
+            <div class="connector-icons connector-icon-trendmicrovisionone"></div>
+            <div class="connector-title">Trend Micro Vision One</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/tripwire_ip360">
+            <div class="connector-icons connector-icon-tripwire_ip360"></div>
+            <div class="connector-title">Tripwire IP360</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/tru-star">
+            <div class="connector-icons connector-icon-tru-star"></div>
+            <div class="connector-title">TruSTAR</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/tufin">
+            <div class="connector-icons connector-icon-tufin"></div>
+            <div class="connector-title">Tufin</div>
+                            <span class="connector-category-badge">Firewall and Network Protection</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/twilio">
+            <div class="connector-icons connector-icon-twilio"></div>
+            <div class="connector-title">Twilio</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/twitter-new">
+            <div class="connector-icons connector-icon-twitter-new"></div>
+            <div class="connector-title">Twitter</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/twitter-feed">
+            <div class="connector-icons connector-icon-twitter-feed"></div>
+            <div class="connector-title">Twitter Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/ultipro">
+            <div class="connector-icons connector-icon-ultipro"></div>
+            <div class="connector-title">UltiPro</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/unit-42-intel-objects-feed">
+            <div class="connector-icons connector-icon-unit-42-intel-objects-feed"></div>
+            <div class="connector-title">Unit 42 Intel Objects Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/unshortenme">
+            <div class="connector-icons connector-icon-unshortenme"></div>
+            <div class="connector-title">Unshorten.me</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/url_expander">
+            <div class="connector-icons connector-icon-url_expander"></div>
+            <div class="connector-title">URL Expander</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/urlhaus">
+            <div class="connector-icons connector-icon-urlhaus"></div>
+            <div class="connector-title">URLhaus</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/url-scan">
+            <div class="connector-icons connector-icon-url-scan"></div>
+            <div class="connector-title">URLScan.io</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/url-void">
+            <div class="connector-icons connector-icon-url-void"></div>
+            <div class="connector-title">URLVoid</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/usom-feed">
+            <div class="connector-icons connector-icon-usom-feed"></div>
+            <div class="connector-title">USOM Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/utilities-new">
+            <div class="connector-icons connector-icon-utilities-new"></div>
+            <div class="connector-title">Utilities Connector</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/vectra">
+            <div class="connector-icons connector-icon-vectra"></div>
+            <div class="connector-title">Vectra</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/veenam">
+            <div class="connector-icons connector-icon-veenam"></div>
+            <div class="connector-title">Veeam Backup &amp; Replication</div>
+                            <span class="connector-category-badge">Storage</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/verodin">
+            <div class="connector-icons connector-icon-verodin"></div>
+            <div class="connector-title">Verodin</div>
+                            <span class="connector-category-badge">Breach and Attack Simulation (BAS)</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/viriback-c2-tracker">
+            <div class="connector-icons connector-icon-viriback-c2-tracker"></div>
+            <div class="connector-title">ViriBack C2 Tracker Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/virustotal">
+            <div class="connector-icons connector-icon-virustotal"></div>
+            <div class="connector-title">VirusTotal</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/virustotal-premium">
+            <div class="connector-icons connector-icon-virustotal-premium"></div>
+            <div class="connector-title">VirusTotal Premium</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/vmrat">
+            <div class="connector-icons connector-icon-vmrat"></div>
+            <div class="connector-title">VMRay</div>
+                            <span class="connector-category-badge">Malware Analysis</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/vmware-cb-edr">
+            <div class="connector-icons connector-icon-vmware-cb-edr"></div>
+            <div class="connector-title">VMware Carbon Black EDR</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/vmware-carbon-black">
+            <div class="connector-icons connector-icon-vmware-carbon-black"></div>
+            <div class="connector-title">VMware Carbon Black Enterprise EDR</div>
+                            <span class="connector-category-badge">Endpoint Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/vmware-nsx-t">
+            <div class="connector-icons connector-icon-vmware-nsx-t"></div>
+            <div class="connector-title">VMware NSX-T</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/vmwaretanzu">
+            <div class="connector-icons connector-icon-vmwaretanzu"></div>
+            <div class="connector-title">VMware Tanzu Service Mesh</div>
+                            <span class="connector-category-badge">IT Services</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/vmware_vSphere">
+            <div class="connector-icons connector-icon-vmware_vSphere"></div>
+            <div class="connector-title">VMware vSphere</div>
+                            <span class="connector-category-badge">Compute Platform</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/vulbdb">
+            <div class="connector-icons connector-icon-vulbdb"></div>
+            <div class="connector-title">VulnDB</div>
+                            <span class="connector-category-badge">Vulnerability and Risk Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/vx-vault-feed">
+            <div class="connector-icons connector-icon-vx-vault-feed"></div>
+            <div class="connector-title">VX Vault Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/wazuh-siem">
+            <div class="connector-icons connector-icon-wazuh-siem"></div>
+            <div class="connector-title">Wazuh SIEM</div>
+                            <span class="connector-category-badge">Analytics and SIEM</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/web-scraper">
+            <div class="connector-icons connector-icon-web-scraper"></div>
+            <div class="connector-title">Web Scraper</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/web-screenshot">
+            <div class="connector-icons connector-icon-web-screenshot"></div>
+            <div class="connector-title">Web Screenshot</div>
+                            <span class="connector-category-badge">Utilities</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/webroot_brightcloud_threat_intelligence">
+            <div class="connector-icons connector-icon-webroot_brightcloud_threat_intelligence"></div>
+            <div class="connector-title">Webroot BrightCloud Threat Intelligence</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/whatsmybrowser">
+            <div class="connector-icons connector-icon-whatsmybrowser"></div>
+            <div class="connector-title">WhatIsMyBrowser</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/whoisrdap">
+            <div class="connector-icons connector-icon-whoisrdap"></div>
+            <div class="connector-title">Whois RDAP</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/whoisxmlapi">
+            <div class="connector-icons connector-icon-whoisxmlapi"></div>
+            <div class="connector-title">Whois XML API</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/whoisfreaks">
+            <div class="connector-icons connector-icon-whoisfreaks"></div>
+            <div class="connector-title">WhoisFreaks</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/wigle">
+            <div class="connector-icons connector-icon-wigle"></div>
+            <div class="connector-title">WiGLE</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/windows-defender-atp">
+            <div class="connector-icons connector-icon-windows-defender-atp"></div>
+            <div class="connector-title">Windows Defender ATP</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/wiz-io">
+            <div class="connector-icons connector-icon-wiz-io"></div>
+            <div class="connector-title">Wiz.io</div>
+                            <span class="connector-category-badge">Asset Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/writesonic-chatsonic">
+            <div class="connector-icons connector-icon-writesonic-chatsonic"></div>
+            <div class="connector-title">Writesonic Chatsonic</div>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/xMatters">
+            <div class="connector-icons connector-icon-xMatters"></div>
+            <div class="connector-title">xMatters</div>
+                            <span class="connector-category-badge">DevOps and Digital Operations</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/zabbix">
+            <div class="connector-icons connector-icon-zabbix"></div>
+            <div class="connector-title">Zabbix</div>
+                            <span class="connector-category-badge">IT Service Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/zendesk">
+            <div class="connector-icons connector-icon-zendesk"></div>
+            <div class="connector-title">Zendesk</div>
+                            <span class="connector-category-badge">Ticket Management</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/zerofox">
+            <div class="connector-icons connector-icon-zerofox"></div>
+            <div class="connector-title">ZeroFox</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/zimbraadmin">
+            <div class="connector-icons connector-icon-zimbraadmin"></div>
+            <div class="connector-title">Zimbra Administrator</div>
+                            <span class="connector-category-badge">Email Server</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/zimbra-mailbox">
+            <div class="connector-icons connector-icon-zimbra-mailbox"></div>
+            <div class="connector-title">Zimbra Mailbox</div>
+                            <span class="connector-category-badge">Email Server</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/zoom">
+            <div class="connector-icons connector-icon-zoom"></div>
+            <div class="connector-title">Zoom</div>
+                            <span class="connector-category-badge">Communication and Coordination</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/zoom-feed">
+            <div class="connector-icons connector-icon-zoom-feed"></div>
+            <div class="connector-title">Zoom Feed</div>
+                            <span class="connector-category-badge">Threat Intelligence</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/zscaler">
+            <div class="connector-icons connector-icon-zscaler"></div>
+            <div class="connector-title">Zscaler</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/zscaler-client-connector">
+            <div class="connector-icons connector-icon-zscaler-client-connector"></div>
+            <div class="connector-title">Zscaler Client Connector</div>
+                            <span class="connector-category-badge">Network Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/zscaler-internet-access">
+            <div class="connector-icons connector-icon-zscaler-internet-access"></div>
+            <div class="connector-title">Zscaler Internet Access</div>
+                            <span class="connector-category-badge">Cloud Security</span>
+                    </a>
+            <a class="connector" href="/fortisoar/connectors/zpa">
+            <div class="connector-icons connector-icon-zpa"></div>
+            <div class="connector-title">Zscaler Private Access</div>
+                    </a>
+    </div>"""
+
+soup = BeautifulSoup(html_content, "html.parser")
+
+connector_map = {}
+
+base_url = "https://docs.fortinet.com"
+
+for connector in soup.find_all("a", class_="connector"):
+    link = connector.get("href")
+
+    title_tag = connector.find("div", class_="connector-title")
+    name = title_tag.get_text(strip=True) if title_tag else None
+
+    if name and link:
+        full_link = base_url + link if link.startswith("/") else link
+        connector_map[name] = full_link
+
+# save to file
+with open("connectors.json", "w", encoding="utf-8") as f:
+    json.dump(connector_map, f, indent=2, ensure_ascii=False)
